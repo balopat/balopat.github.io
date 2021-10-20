@@ -1,1 +1,1 @@
-Sitemap: http://balintpato.com/sitemap.xml
+Sitemap: https://refactorium.com/sitemap.xml
