@@ -9,9 +9,11 @@ published: true
 
 ## Introduction
 
-I built a simple visualization tool, the commutator plot, that I used to better understand commutativity in finite groups as I was in learning about group theory this semester. By the end of this post, I aim to summarize a couple of concepts leading up to two theorems illustrated with this visualization. Namely, we'll touch on group action, orbits and stabilizers of an element, the permutation representation of groups, conjugation, conjugacy classes, centralizers and we'll derive the formula for the number of conjugacy classes. We will also look at why the probability that two randomly picked elements commute in a finite group is maximum 5/8 in non-abelian groups, which I find fascinating.
+I built a simple visualization tool, the commutator plot, that I used to better understand commutativity in finite groups as I was learning about group theory this semester. By the end of this post, I aim to summarize a couple of concepts leading up to two theorems illustrated with this visualization. Namely, we'll touch on group action, orbits and stabilizers of an element, the permutation representation of groups, conjugation, conjugacy classes, centralizers, and we'll derive the formula for the number of conjugacy classes. We will also look at why the probability that two randomly picked elements commute in a finite group is a maximum of 5/8 in non-abelian groups, which I find fascinating.
 
-Disclaimer: the function implementation and Mathematica syntax used is very naive, and blows up with larger groups. I am open for PRs, contributions, suggestions for improvements!
+Disclaimer: the function implementation and Mathematica syntax used is very naive, and blows up with larger groups. I am open to PRs, contributions, suggestions for improvements!
+
+Please visit the [Github Discussion for this post](https://github.com/balopat/balopat.github.io/discussions/1) for comments! 
 
 
 ## [background] Groups acting on sets
@@ -88,7 +90,7 @@ Two elements, $g, h \in G$ commute when $hg = gh$. This is the same as saying $g
 
 If we have $G$ act on itself by conjugation, the orbit of an element $g$, a.k.a the disjoint equivalence class, is called the [conjugacy class](https://en.wikipedia.org/wiki/Conjugacy_class) of $g$. The stabilizer subgroup under conjugation for $g$ is the subgroup that fixes $g$ by conjugation. What does that mean? It means that it's all the elements $g$ commutes with. There is a special name for that: the [centralizer](https://mathworld.wolfram.com/Centralizer.html) of $g$ in $G$, denoted $C_G(g)$. The elements that commute with everything are called the [center](https://en.wikipedia.org/wiki/Center_(group_theory)) of $G$, $Z(G)$ - it is easy to see that the center is the intersection of all the centralizers and hence it is also a subgroup.
 
-It is easy to prove (p 125 in [1]) that conjugation preserves the length of the cycles of a permutation, i.e. all the conjugates within a conjugacy class have the same cycle lengths. In Mathematica, you could write a function called `CycleLengths` that does this calculation.
+It is easy to prove (p 125 in {% cite dummit2003abstract %}) that conjugation preserves the length of the cycles of a permutation, i.e. all the conjugates within a conjugacy class have the same cycle lengths. In Mathematica, you could write a function called `CycleLengths` that does this calculation.
 
 {% raw %}
 ```mathematica
@@ -103,7 +105,7 @@ Out[3]= {2,3}
 
 However, even though elements in the same conjugacy class have the same cycle lengths, it doesn't necessarily work the other direction. To see this there are two examples in mind: abelian groups and the $Q_8$ quaternion group. 
 
-As everything commutes with everything in abelian groups, the conjugacy class for each element is going to contain only that element. But in a cyclic group of prime order for example all non-trivial elements have order $p$, their permutation representation looks like $(1234...p)$. How is that possible? Well, there are no other elements to conjugate them into each other...or to put it another way all elements fix each other by conjugation.
+As everything commutes with everything in abelian groups, the conjugacy class for each element is going to contain only that element. But in a cyclic group of prime order for example all non-trivial elements are of order $p$, their permutation representation looks like $(1234...p)$. How is that possible? Well, there are no other elements to conjugate them into each other...or to put it another way all elements fix each other by conjugation.
 
 In the quaternion group $Q_8$, $i, j, k$ have the same cycle lengths but you can only get as far as an element and its inverse in the conjugacy classes. There are no elements in the group that can do the conjugation. 
 
@@ -126,9 +128,9 @@ We know that every element commutes with:
 - itself $\rightarrow$ the diagonal is always going to be blue
 - the identity $\rightarrow$ the first row and column will always be blue
 
-In the case of $Q_8$, some of the elements are not self-inverse, e.g. $i^{-1} = -i$, and we know that the elements commute with their own inverse. In the current labeling, the inverses are next to each other, that's why we see the 2x2 blue squares on the diagonal.
+In the case of $Q_8$, some of the elements are not self-inverse, e.g. $i^{-1} = -i$, and we know that the elements commute with their inverse. In the current labeling, the inverses are next to each other, that's why we see the 2x2 blue squares on the diagonal.
 
-Also, notice the yellow grid. As we organized the elements by conjugacy class, a conjugacy class will be a contiguous interval of rows and columns. The intersection of these regions is the where the inter-class commutation relations are visible. We can see intra-class commutativity relations outside of the block diagonal squares. 
+Also, notice the yellow grid. As we organized the elements by conjugacy class, a conjugacy class will be a contiguous interval of rows and columns. The intersection of these regions is where the inter-class commutation relations are visible. We can see intra-class commutativity relations outside of the block diagonal squares. 
 
 As I mentioned in the previous part, cyclic groups are abelian, every element commutes with each other, thus in the commutator plot we will have
 - a fully blue plot
@@ -155,9 +157,9 @@ To see this, let's line up our concepts next to each other in the different "lan
 | number of conjugacy classes | number of orbits | number of yellow grid intervals | 
 
 
-Now, the centralizer for each element is a subgroup, in fact the stabilizer for the element when we consider the group acting on itself by conjugation. As we noted, the size of the orbit is exactly the index of the stabilizer, which means exactly that the blue squares will add up to $\lvert G \lvert$ within the yellow lines. In case of $Q_8$ above, if we add up all the blue squares and divide it by $G$, then we get the number of conjugacy classes, which is 5!
+Now, the centralizer for each element is a subgroup, in fact, the stabilizer for the element when we consider the group acting on itself by conjugation. As we noted, the size of the orbit is exactly the index of the stabilizer, which means exactly that the blue squares will add up to $\lvert G \lvert$ within the yellow lines. In the case of $Q_8$ above, if we add up all the blue squares and divide it by $G$, then we get the number of conjugacy classes, which is 5!
 
-Hopefully, now it is more clear why the equation holds for number of conjugacy classes: 
+Hopefully, now it is more clear why the equation holds for the number of conjugacy classes: 
 
 {% katexmm %}
 $$
@@ -165,7 +167,7 @@ k = \frac{\sum_{g \in G} |C_G(g)|}{|G|}
 $$
 {% endkatexmm %}
 
-Another example is the Pauli group (or Heisenberg-Weyl group), that has fundamental importance in quantum mechanics and quantum computing. It is generated by the Pauli matrices $X, Y, Z$: 
+Another example is the Pauli group (or Heisenberg-Weyl group), which is of fundamental importance in quantum mechanics and quantum computing. It is generated by the Pauli matrices $X, Y, Z$: 
 
 {% katexmm %}
 $$
@@ -187,11 +189,11 @@ These 3 matrices generate 16 elements, so our permutation representation will be
 <img src="/assets/images/pauli-commute.png" width="90%">
 </center>
 
-We can see that the center of the Pauli group is $\\{\pm I, \pm i I\\}$, each element there has their own conjugacy class, and then, interestingly each element has only one conjugate, which is -1 times the element itself.
+We can see that the center of the Pauli group is $\\{\pm I, \pm i I\\}$, each element there has its own conjugacy class, and then, interestingly each element has only one conjugate, which is -1 times the element itself.
 
 ## [apply] The probability that two elements commute
 
-The commutator plot almost intuitively leads to this question: how dense can the blue squares be? In probabilistic terms the proportion of the blue vs the full area is equivalent of the probability that two random elements commute from $G$. Of course, we are interested in non-abelian groups, as abelian groups have a boring full-blue plot. In case of $S_6$, the plot becomes very large (6! x 6!), but we can see that it is very sparse (also has some cool structure in there): 
+The commutator plot almost intuitively leads to this question: how dense can the blue squares be? In probabilistic terms, the proportion of the blue vs the full area is equivalent to the probability that two random elements commute from $G$. Of course, we are interested in non-abelian groups, as abelian groups have a boring full-blue plot. In the case of $S_6$, the plot becomes very large (6! x 6!), but we can see that it is very sparse (also has some cool structure in there): 
 
 <center>
 <a href="/assets/images/s6-commute.png" target="blank"><img src="/assets/images/s6-commute.png" width="60%"/></a>
@@ -212,9 +214,9 @@ With the function above (again, very slow, brute force implementation, careful),
 
 - abelian groups of course 100% 
 - Symmetric group of order 6: 11/720 - pretty low!
-- Quaternion group, Dihedral group of order 4 and the Pauli group: 5/8 
+- Quaternion group, Dihedral group of order 4, and the Pauli group: 5/8 
 
-Can we go higher? It turns out that it is impossible for two random elements in a non-abelian group to have more than 5/8 chance to commute! 
+Can we go higher? It turns out that two random elements in a non-abelian group can't have more than a 5/8 chance to commute! 
 
 The proof is relatively simple: given that the centralizer $C_G(g)$ for any element $g \in G$ in a non-abelian group is a proper subgroup, it can only be of order $\lvert G \lvert/2$ at most (due to [Lagrange](https://en.wikipedia.org/wiki/Lagrange%27s_theorem_(group_theory)) the subgroup's order has to divide the group's order). But, the same is true for the center of the group itself, $Z(G)$ is a subgroup of all the centralizers, and as such, it must be up to half the size of the centralizers, and as such, it must be that $\lvert Z(G) \lvert  \leq \lvert G \lvert /4$. We can see in the Pauli group that the center has 4 elements, out of the 16, we are hitting this limit. 
 
@@ -234,7 +236,7 @@ p(g,h \in G \text{ commute}) = \frac{\sum_{g \in Z(G)} |G|}{|G|^2} + \frac{\sum_
 $$
 {% endkatexmm %}
 
-Let's divide in with order of $G$: 
+Let's divide in with the order of $G$: 
 
 {% katexmm %}
 $$
@@ -263,12 +265,12 @@ When I first saw this, my mind was blown - group theory seems like this area of 
 
 ## Conclusion
 
-We demonstrated a simple tool to visualize commutation relationships within finite groups. It leverages the permutation representation of groups, which allow for a natural ordering that simplifies grouping conjugation classes together. We demonstrated proofs aided by this visual language for two theorems. I hope you enjoyed it, learned something from it! 
+We demonstrated a simple tool to visualize commutation relationships within finite groups. It leverages the permutation representation of groups, which allows for a natural ordering that simplifies grouping conjugation classes together. We demonstrated proofs aided by this visual language for two theorems. I hope you enjoyed it, learned something from it! 
 
 
 ### Further things to explore and improve
 
-This is probably just the tip of the iceberg. If I had infinite amount of time I would explore a couple of ideas:
+This is probably just the tip of the iceberg. If I had an infinite amount of time I would explore a couple of ideas:
 - Are these "game-of-life" type structures/patterns that show up in the plot of any interest? Can we derive anything from patterns formed on the plot from this particular ordering? Can other orderings result in different insights?
 - What else can we visualize in this plot: 
    - Can we represent normalizers? 
@@ -277,4 +279,4 @@ This is probably just the tip of the iceberg. If I had infinite amount of time I
    - Make the tool interactive
    - create a Python/Javascript version of it, so it doesn't depend on non-opensource software
 
-If you find issues with the post, please open an issue, or PR to fix it!
+If you find issues with the post, please open an issue or PR to fix it!
