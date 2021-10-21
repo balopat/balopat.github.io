@@ -13,4 +13,4 @@ katex:
     # Default KaTeX rendering options. See https://github.com/Khan/KaTeX#rendering-options
     throw_error: false      # throwOnError - set to false if you want rendering to output error as text rather than a build error
     error_color: "#cc0000"  # errorColor
-google_analytics:   UA-2011187-5
+google_analytics: UA-49396309-2
