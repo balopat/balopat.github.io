@@ -113,7 +113,7 @@ To summarize - conjugacy classes split up $G$ into disjoint sets, and while cycl
 
 ## [idea] The commutativity plot: commuting visibly
 
-To visualize all the ideas above, I coded up a function called `CommutatorPlot` in [this gist](https://gist.github.com/balopat/3e363e7ca4492fd77703ff80a14830bf). If we order the elements of the group by their conjugacy class and then their natural sorting order (defined by Mathematica), and we plot whether they commute or not, we'll get a graph plot like this for our quaternion group, $Q_8$: 
+To visualize all the ideas above, I coded up a function called `CommutativityPlot` in [this gist](https://gist.github.com/balopat/3e363e7ca4492fd77703ff80a14830bf). If we order the elements of the group by their conjugacy class and then their natural sorting order (defined by Mathematica), and we plot whether they commute or not, we'll get a graph plot like this for our quaternion group, $Q_8$: 
 
 
 <center>
