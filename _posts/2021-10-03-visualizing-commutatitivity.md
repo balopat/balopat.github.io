@@ -1,6 +1,6 @@
 ---
 title: Visualizing commutative structure in groups
-subtitle: Introducing the commutator plot to explain basic concepts related to commutativity
+subtitle: Introducing the commutativity plot to explain basic concepts related to commutativity
 layout: default
 date: 2021-10-20
 keywords: grouptheory
@@ -9,7 +9,7 @@ published: true
 
 ## Introduction
 
-I built a simple visualization tool, the commutator plot, that I used to better understand commutativity in finite groups as I was learning about group theory this semester. By the end of this post, I aim to summarize a couple of concepts leading up to two theorems illustrated with this visualization. Namely, we'll touch on group action, orbits and stabilizers of an element, the permutation representation of groups, conjugation, conjugacy classes, centralizers, and we'll derive the formula for the number of conjugacy classes. We will also look at why the probability that two randomly picked elements commute in a finite group is a maximum of 5/8 in non-abelian groups, which I find fascinating.
+I built a simple visualization tool, the commutativity plot, that I used to better understand commutativity in finite groups as I was learning about group theory this semester. By the end of this post, I aim to summarize a couple of concepts leading up to two theorems illustrated with this visualization. Namely, we'll touch on group action, orbits and stabilizers of an element, the permutation representation of groups, conjugation, conjugacy classes, centralizers, and we'll derive the formula for the number of conjugacy classes. We will also look at why the probability that two randomly picked elements commute in a finite group is a maximum of 5/8 in non-abelian groups, which I find fascinating.
 
 Disclaimer: the function implementation and Mathematica syntax used is very naive, and blows up with larger groups. I am open to PRs, contributions, suggestions for improvements!
 
@@ -111,7 +111,7 @@ In the quaternion group $Q_8$, $i, j, k$ have the same cycle lengths but you can
 
 To summarize - conjugacy classes split up $G$ into disjoint sets, and while cycle lengths are the same within a conjugacy class, the property of being in a conjugacy class is inherently connected to the group you are in. 
 
-## [idea] The commutator plot: commuting visibly
+## [idea] The commutativity plot: commuting visibly
 
 To visualize all the ideas above, I coded up a function called `CommutatorPlot` in [this gist](https://gist.github.com/balopat/3e363e7ca4492fd77703ff80a14830bf). If we order the elements of the group by their conjugacy class and then their natural sorting order (defined by Mathematica), and we plot whether they commute or not, we'll get a graph plot like this for our quaternion group, $Q_8$: 
 
@@ -132,11 +132,11 @@ In the case of $Q_8$, some of the elements are not self-inverse, e.g. $i^{-1} = 
 
 Also, notice the yellow grid. As we organized the elements by conjugacy class, a conjugacy class will be a contiguous interval of rows and columns. The intersection of these regions is where the inter-class commutation relations are visible. We can see intra-class commutativity relations outside of the block diagonal squares. 
 
-As I mentioned in the previous part, cyclic groups are abelian, every element commutes with each other, thus in the commutator plot we will have
+As I mentioned in the previous part, cyclic groups are abelian, every element commutes with each other, thus in the commutativity plot we will have
 - a fully blue plot
 - conjugacy classes of size 1.
 
-As an example see below the (pretty boring) commutator plot for the $C_4$ group.
+As an example see below the (pretty boring) commutativity plot for the $C_4$ group.
 <center>
 <img src="/assets/images/c4-commute.png" width="60%"/>
 </center>
@@ -148,7 +148,7 @@ Within a conjugacy class (i.e. between two yellow lines), the number of blue squ
 To see this, let's line up our concepts next to each other in the different "languages" we talk about them: 
 
 
-| Conjugation | Group acting on _itself_ by conjugation | Commutator plot |
+| Conjugation | Group acting on _itself_ by conjugation | commutativity plot |
 | ------------------- | ---------------------------| ----------------- |
 | element $a \in G$ | the target $a \in G$ of the group action | a row / a column | 
 | centralizer of $a$, $C_G(a)$, things that commute with $a$ | stabilizer of $a$, $S_G(a)$ | the elements corresponding to the blue squares in a row / column | 
@@ -193,7 +193,7 @@ We can see that the center of the Pauli group is $\\{\pm I, \pm i I\\}$, each el
 
 ## [apply] The probability that two elements commute
 
-The commutator plot almost intuitively leads to this question: how dense can the blue squares be? In probabilistic terms, the proportion of the blue vs the full area is equivalent to the probability that two random elements commute from $G$. Of course, we are interested in non-abelian groups, as abelian groups have a boring full-blue plot. In the case of $S_6$, the plot becomes very large (6! x 6!), but we can see that it is very sparse (also has some cool structure in there): 
+The commutativity plot almost intuitively leads to this question: how dense can the blue squares be? In probabilistic terms, the proportion of the blue vs the full area is equivalent to the probability that two random elements commute from $G$. Of course, we are interested in non-abelian groups, as abelian groups have a boring full-blue plot. In the case of $S_6$, the plot becomes very large (6! x 6!), but we can see that it is very sparse (also has some cool structure in there): 
 
 <center>
 <a href="/assets/images/s6-commute.png" target="blank"><img src="/assets/images/s6-commute.png" width="60%"/></a>
