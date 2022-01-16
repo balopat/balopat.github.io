@@ -1,6 +1,33 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="https://refactorium.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://refactorium.com/" rel="alternate" type="text/html" /><updated>2021-10-20T22:25:06-04:00</updated><id>https://refactorium.com/feed.xml</id><entry><title type="html">Visualizing commutative structure in groups</title><link href="https://refactorium.com/blog/2021/10/20/visualizing-commutatitivity/" rel="alternate" type="text/html" title="Visualizing commutative structure in groups" /><published>2021-10-20T00:00:00-04:00</published><updated>2021-10-20T00:00:00-04:00</updated><id>https://refactorium.com/blog/2021/10/20/visualizing-commutatitivity</id><content type="html" xml:base="https://refactorium.com/blog/2021/10/20/visualizing-commutatitivity/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-01-16T14:28:07-05:00</updated><id>http://localhost:4000/feed.xml</id><entry><title type="html">Why are there so few quantum algorithms?</title><link href="http://localhost:4000/blog/2022/01/16/qsvt01-qsp/" rel="alternate" type="text/html" title="Why are there so few quantum algorithms?" /><published>2022-01-16T00:00:00-05:00</published><updated>2022-01-16T00:00:00-05:00</updated><id>http://localhost:4000/blog/2022/01/16/qsvt01-qsp</id><content type="html" xml:base="http://localhost:4000/blog/2022/01/16/qsvt01-qsp/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
 
-&lt;p&gt;I built a simple visualization tool, the commutator plot, that I used to better understand commutativity in finite groups as I was learning about group theory this semester. By the end of this post, I aim to summarize a couple of concepts leading up to two theorems illustrated with this visualization. Namely, we’ll touch on group action, orbits and stabilizers of an element, the permutation representation of groups, conjugation, conjugacy classes, centralizers, and we’ll derive the formula for the number of conjugacy classes. We will also look at why the probability that two randomly picked elements commute in a finite group is a maximum of 5/8 in non-abelian groups, which I find fascinating.&lt;/p&gt;
+&lt;p&gt;The field of quantum computing is a rapidly growing field of research trying to make computers based on the mathematical framework that was dubbed “quantum mechanics” in the early 20th century. These computers are not likely to hit consumer markets as the PC did, at least not in the next couple of decades. Some companies decided to make these early machines available to the public. IBM, IonQ and Rigetti are already offering their machines through cloud solutions to everyone in the world, some of them for free, some of them for a charge. &lt;strong&gt;So, how come we are not seeing an explosion of quantum apps?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;want-more-apps-invent-more-algorithms&quot;&gt;Want more apps? Invent more algorithms!&lt;/h2&gt;
+
+&lt;p&gt;Well, there are multiple issues. One is that even though these small &amp;lt;100 qubit machines do exist, they are still very limited, one can only run short algorithms on them, before they produce random noise. It is &lt;strong&gt;hard to develop applications for something that doesn’t exist yet&lt;/strong&gt; and it will take a long journey to make quantum computers more reliable.&lt;/p&gt;
+
+&lt;p&gt;The other big issue is that &lt;strong&gt;even if we had a reliable, large enough quantum computer, it might not be that useful just yet&lt;/strong&gt;. This is not just because they are complicated and hard to program, but also because &lt;strong&gt;we have a scarcity of “killer apps”&lt;/strong&gt;. No surprise that there is a huge interest to find scientifically and eventually commercially viable applications.&lt;/p&gt;
+
+&lt;p&gt;There is &lt;strong&gt;a bottleneck&lt;/strong&gt; in trying to find applications: &lt;strong&gt;there are not many quantum algorithms to choose from&lt;/strong&gt;. Valuable quantum applications will rely on quantum algorithms that can beat classical algorithms in one or more aspects.&lt;/p&gt;
+
+&lt;h2 id=&quot;why-are-there-not-that-many-quantum-algorithms&quot;&gt;Why are there not that many quantum algorithms?&lt;/h2&gt;
+
+&lt;p&gt;In 2005, 17 years ago, Peter Shor, was pondering about this question as it was already 10 years since he invented the factoring algorithm, which will turn 30 in a couple of years. At that point the majority of the algos were based on QFT, Grover’s or simulation.&lt;/p&gt;
+
+&lt;p&gt;TODO: Shor’s reasons for lack of algorithms&lt;/p&gt;
+
+&lt;p&gt;Today’s situation:   Most quantum algorithms are collected on the &lt;a href=&quot;https://quantumalgorithmzoo.org/&quot;&gt;Quantum Algorithm Zoo&lt;/a&gt;, maintained by Stephen Jordan (Microsoft).  However, most of these …..&lt;/p&gt;
+
+&lt;p&gt;TODO: compile a tree and stats on number of polynomial vs superpolynomial algos 
+TODO: look at Child’s and Preskill’s review&lt;/p&gt;
+
+&lt;p&gt;TODO: QSVT and its promise&lt;/p&gt;
+
+&lt;p&gt;re Quantum Singular Value Transformation is a framework introduced by András Gilyén and Yuan Su and Guang Hao Low and  Nathan Wiebe&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;</content><author><name></name></author><summary type="html">Introduction</summary></entry><entry><title type="html">Visualizing commutative structure in groups</title><link href="http://localhost:4000/blog/2021/10/20/visualizing-commutatitivity/" rel="alternate" type="text/html" title="Visualizing commutative structure in groups" /><published>2021-10-20T00:00:00-04:00</published><updated>2021-10-20T00:00:00-04:00</updated><id>http://localhost:4000/blog/2021/10/20/visualizing-commutatitivity</id><content type="html" xml:base="http://localhost:4000/blog/2021/10/20/visualizing-commutatitivity/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;I built a simple visualization tool, the commutativity plot, that I used to better understand commutativity in finite groups as I was learning about group theory this semester. By the end of this post, I aim to summarize a couple of concepts leading up to two theorems illustrated with this visualization. Namely, we’ll touch on group action, orbits and stabilizers of an element, the permutation representation of groups, conjugation, conjugacy classes, centralizers, and we’ll derive the formula for the number of conjugacy classes. We will also look at why the probability that two randomly picked elements commute in a finite group is a maximum of 5/8 in non-abelian groups, which I find fascinating.&lt;/p&gt;
 
 &lt;p&gt;Disclaimer: the function implementation and Mathematica syntax used is very naive, and blows up with larger groups. I am open to PRs, contributions, suggestions for improvements!&lt;/p&gt;
 
@@ -90,9 +117,9 @@ Two elements, $g, h \in G$ commute when $hg = gh$. This is the same as saying $g
 
 &lt;p&gt;To summarize - conjugacy classes split up $G$ into disjoint sets, and while cycle lengths are the same within a conjugacy class, the property of being in a conjugacy class is inherently connected to the group you are in.&lt;/p&gt;
 
-&lt;h2 id=&quot;idea-the-commutator-plot-commuting-visibly&quot;&gt;[idea] The commutator plot: commuting visibly&lt;/h2&gt;
+&lt;h2 id=&quot;idea-the-commutativity-plot-commuting-visibly&quot;&gt;[idea] The commutativity plot: commuting visibly&lt;/h2&gt;
 
-&lt;p&gt;To visualize all the ideas above, I coded up a function called &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CommutatorPlot&lt;/code&gt; in &lt;a href=&quot;https://gist.github.com/balopat/3e363e7ca4492fd77703ff80a14830bf&quot;&gt;this gist&lt;/a&gt;. If we order the elements of the group by their conjugacy class and then their natural sorting order (defined by Mathematica), and we plot whether they commute or not, we’ll get a graph plot like this for our quaternion group, $Q_8$:&lt;/p&gt;
+&lt;p&gt;To visualize all the ideas above, I coded up a function called &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CommutativityPlot&lt;/code&gt; in &lt;a href=&quot;https://gist.github.com/balopat/3e363e7ca4492fd77703ff80a14830bf&quot;&gt;this gist&lt;/a&gt;. If we order the elements of the group by their conjugacy class and then their natural sorting order (defined by Mathematica), and we plot whether they commute or not, we’ll get a graph plot like this for our quaternion group, $Q_8$:&lt;/p&gt;
 
 &lt;center&gt;
 &lt;img src=&quot;/assets/images/q8-commute.png&quot; width=&quot;60%&quot; /&gt;
@@ -112,13 +139,13 @@ Two elements, $g, h \in G$ commute when $hg = gh$. This is the same as saying $g
 
 &lt;p&gt;Also, notice the yellow grid. As we organized the elements by conjugacy class, a conjugacy class will be a contiguous interval of rows and columns. The intersection of these regions is where the inter-class commutation relations are visible. We can see intra-class commutativity relations outside of the block diagonal squares.&lt;/p&gt;
 
-&lt;p&gt;As I mentioned in the previous part, cyclic groups are abelian, every element commutes with each other, thus in the commutator plot we will have&lt;/p&gt;
+&lt;p&gt;As I mentioned in the previous part, cyclic groups are abelian, every element commutes with each other, thus in the commutativity plot we will have&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;a fully blue plot&lt;/li&gt;
   &lt;li&gt;conjugacy classes of size 1.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;As an example see below the (pretty boring) commutator plot for the $C_4$ group.&lt;/p&gt;
+&lt;p&gt;As an example see below the (pretty boring) commutativity plot for the $C_4$ group.&lt;/p&gt;
 &lt;center&gt;
 &lt;img src=&quot;/assets/images/c4-commute.png&quot; width=&quot;60%&quot; /&gt;
 &lt;/center&gt;
@@ -134,7 +161,7 @@ Two elements, $g, h \in G$ commute when $hg = gh$. This is the same as saying $g
     &lt;tr&gt;
       &lt;th&gt;Conjugation&lt;/th&gt;
       &lt;th&gt;Group acting on &lt;em&gt;itself&lt;/em&gt; by conjugation&lt;/th&gt;
-      &lt;th&gt;Commutator plot&lt;/th&gt;
+      &lt;th&gt;commutativity plot&lt;/th&gt;
     &lt;/tr&gt;
   &lt;/thead&gt;
   &lt;tbody&gt;
@@ -198,7 +225,7 @@ Z = \begin{pmatrix} 1 &amp;amp; 0 \\
 
 &lt;h2 id=&quot;apply-the-probability-that-two-elements-commute&quot;&gt;[apply] The probability that two elements commute&lt;/h2&gt;
 
-&lt;p&gt;The commutator plot almost intuitively leads to this question: how dense can the blue squares be? In probabilistic terms, the proportion of the blue vs the full area is equivalent to the probability that two random elements commute from $G$. Of course, we are interested in non-abelian groups, as abelian groups have a boring full-blue plot. In the case of $S_6$, the plot becomes very large (6! x 6!), but we can see that it is very sparse (also has some cool structure in there):&lt;/p&gt;
+&lt;p&gt;The commutativity plot almost intuitively leads to this question: how dense can the blue squares be? In probabilistic terms, the proportion of the blue vs the full area is equivalent to the probability that two random elements commute from $G$. Of course, we are interested in non-abelian groups, as abelian groups have a boring full-blue plot. In the case of $S_6$, the plot becomes very large (6! x 6!), but we can see that it is very sparse (also has some cool structure in there):&lt;/p&gt;
 
 &lt;center&gt;
 &lt;a href=&quot;/assets/images/s6-commute.png&quot; target=&quot;blank&quot;&gt;&lt;img src=&quot;/assets/images/s6-commute.png&quot; width=&quot;60%&quot; /&gt;&lt;/a&gt;

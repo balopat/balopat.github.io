@@ -1,0 +1,106 @@
+<html>
+<head>
+    <title>Why are there so few quantum algorithms?</title>
+    <meta charset='UTF-8'>
+    <meta content='width=device-width, initial-scale=1' name='viewport'/>
+
+    <meta name='description' content='Balint Pato is a PhD candidate at Duke University.'>
+    <meta name='keywords' content='quantum computing, qsvt, quantum  singular value transformation'>
+    <meta name='author' content='Balint Pato'>
+
+    <link href='/css/blog.css' rel='stylesheet'/>
+    <link href='/css/trac.css' rel='stylesheet'/>
+    <link href='/css/markdown.css' rel='stylesheet'/>
+    <link rel="stylesheet"
+    href="//unpkg.com/@highlightjs/cdn-assets@11.2.0/styles/default.min.css">
+    <script src="/assets/highlight.min.js"></script>
+    <script type='text/x-mathjax-config'>
+MathJax.Hub.Config({
+  jax: ['input/TeX', 'output/HTML-CSS'],
+  tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$']],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    extensions: ['color.js']
+  },
+  messageStyle: 'none',
+  'HTML-CSS': { preferredFont: 'TeX', availableFonts: ['STIX','TeX'] }
+});
+</script>
+
+
+<script src='//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML' type='text/javascript'></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+</head>
+<body>
+<div class='content'>
+    <div class='nav'>
+    <ul class='wrap'>
+        <li><a href='/'>Home</a></li>
+        <li><a href='/about'>About</a></li>
+        <li><a href='/feed.xml'>RSS</a></li>
+    </ul>
+</div>
+    <div class='front-matter'>
+        <div class='wrap'>
+            <h1>Why are there so few quantum algorithms?</h1>
+            <h4>The start of a series of posts to explore a potential new avenue to discover quantum algorithms</h4>
+            <div class='bylines'>
+                <div class='byline'>
+                    <h3>Published</h3>
+                    <p>16 January 2022</p>
+                </div>
+            </div>
+            <div class='clear'></div>
+        </div>
+    </div>
+    <div class='wrap article'>
+        <h2 id="introduction">Introduction</h2>
+
+<p>The field of quantum computing is a rapidly growing field of research trying to make computers based on the mathematical framework that was dubbed “quantum mechanics” in the early 20th century. These computers are not likely to hit consumer markets as the PC did, at least not in the next couple of decades. Some companies decided to make these early machines available to the public. IBM, IonQ and Rigetti are already offering their machines through cloud solutions to everyone in the world, some of them for free, some of them for a charge. <strong>So, how come we are not seeing an explosion of quantum apps?</strong></p>
+
+<h2 id="want-more-apps-invent-more-algorithms">Want more apps? Invent more algorithms!</h2>
+
+<p>Well, there are multiple issues. One is that even though these small &lt;100 qubit machines do exist, they are still very limited, one can only run short algorithms on them, before they produce random noise. It is <strong>hard to develop applications for something that doesn’t exist yet</strong> and it will take a long journey to make quantum computers more reliable.</p>
+
+<p>The other big issue is that <strong>even if we had a reliable, large enough quantum computer, it might not be that useful just yet</strong>. This is not just because they are complicated and hard to program, but also because <strong>we have a scarcity of “killer apps”</strong>. No surprise that there is a huge interest to find scientifically and eventually commercially viable applications.</p>
+
+<p>There is <strong>a bottleneck</strong> in trying to find applications: <strong>there are not many quantum algorithms to choose from</strong>. Valuable quantum applications will rely on quantum algorithms that can beat classical algorithms in one or more aspects.</p>
+
+<h2 id="why-are-there-not-that-many-quantum-algorithms">Why are there not that many quantum algorithms?</h2>
+
+<p>In 2005, 17 years ago, Peter Shor, was pondering about this question as it was already 10 years since he invented the factoring algorithm, which will turn 30 in a couple of years. At that point the majority of the algos were based on QFT, Grover’s or simulation.</p>
+
+<p>TODO: Shor’s reasons for lack of algorithms</p>
+
+<p>Today’s situation:   Most quantum algorithms are collected on the <a href="https://quantumalgorithmzoo.org/">Quantum Algorithm Zoo</a>, maintained by Stephen Jordan (Microsoft).  However, most of these …..</p>
+
+<p>TODO: compile a tree and stats on number of polynomial vs superpolynomial algos 
+TODO: look at Child’s and Preskill’s review</p>
+
+<p>TODO: QSVT and its promise</p>
+
+<p>re Quantum Singular Value Transformation is a framework introduced by András Gilyén and Yuan Su and Guang Hao Low and  Nathan Wiebe</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+
+    </div>
+    <div id='bibliography'>
+        <div class='wrap'>
+            <ol class="bibliography"></ol>
+        </div>
+    </div>
+</div>
+<script>hljs.highlightAll();</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-49396309-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-49396309-2');
+</script>
+</body>
+</html>

@@ -45,7 +45,7 @@ MathJax.Hub.Config({
     <div class='front-matter'>
         <div class='wrap'>
             <h1>Visualizing commutative structure in groups</h1>
-            <h4>Introducing the commutator plot to explain basic concepts related to commutativity</h4>
+            <h4>Introducing the commutativity plot to explain basic concepts related to commutativity</h4>
             <div class='bylines'>
                 <div class='byline'>
                     <h3>Published</h3>
@@ -58,7 +58,7 @@ MathJax.Hub.Config({
     <div class='wrap article'>
         <h2 id="introduction">Introduction</h2>
 
-<p>I built a simple visualization tool, the commutator plot, that I used to better understand commutativity in finite groups as I was learning about group theory this semester. By the end of this post, I aim to summarize a couple of concepts leading up to two theorems illustrated with this visualization. Namely, we’ll touch on group action, orbits and stabilizers of an element, the permutation representation of groups, conjugation, conjugacy classes, centralizers, and we’ll derive the formula for the number of conjugacy classes. We will also look at why the probability that two randomly picked elements commute in a finite group is a maximum of 5/8 in non-abelian groups, which I find fascinating.</p>
+<p>I built a simple visualization tool, the commutativity plot, that I used to better understand commutativity in finite groups as I was learning about group theory this semester. By the end of this post, I aim to summarize a couple of concepts leading up to two theorems illustrated with this visualization. Namely, we’ll touch on group action, orbits and stabilizers of an element, the permutation representation of groups, conjugation, conjugacy classes, centralizers, and we’ll derive the formula for the number of conjugacy classes. We will also look at why the probability that two randomly picked elements commute in a finite group is a maximum of 5/8 in non-abelian groups, which I find fascinating.</p>
 
 <p>Disclaimer: the function implementation and Mathematica syntax used is very naive, and blows up with larger groups. I am open to PRs, contributions, suggestions for improvements!</p>
 
@@ -148,9 +148,9 @@ Two elements, $g, h \in G$ commute when $hg = gh$. This is the same as saying $g
 
 <p>To summarize - conjugacy classes split up $G$ into disjoint sets, and while cycle lengths are the same within a conjugacy class, the property of being in a conjugacy class is inherently connected to the group you are in.</p>
 
-<h2 id="idea-the-commutator-plot-commuting-visibly">[idea] The commutator plot: commuting visibly</h2>
+<h2 id="idea-the-commutativity-plot-commuting-visibly">[idea] The commutativity plot: commuting visibly</h2>
 
-<p>To visualize all the ideas above, I coded up a function called <code class="language-plaintext highlighter-rouge">CommutatorPlot</code> in <a href="https://gist.github.com/balopat/3e363e7ca4492fd77703ff80a14830bf">this gist</a>. If we order the elements of the group by their conjugacy class and then their natural sorting order (defined by Mathematica), and we plot whether they commute or not, we’ll get a graph plot like this for our quaternion group, $Q_8$:</p>
+<p>To visualize all the ideas above, I coded up a function called <code class="language-plaintext highlighter-rouge">CommutativityPlot</code> in <a href="https://gist.github.com/balopat/3e363e7ca4492fd77703ff80a14830bf">this gist</a>. If we order the elements of the group by their conjugacy class and then their natural sorting order (defined by Mathematica), and we plot whether they commute or not, we’ll get a graph plot like this for our quaternion group, $Q_8$:</p>
 
 <center>
 <img src="/assets/images/q8-commute.png" width="60%" />
@@ -170,13 +170,13 @@ Two elements, $g, h \in G$ commute when $hg = gh$. This is the same as saying $g
 
 <p>Also, notice the yellow grid. As we organized the elements by conjugacy class, a conjugacy class will be a contiguous interval of rows and columns. The intersection of these regions is where the inter-class commutation relations are visible. We can see intra-class commutativity relations outside of the block diagonal squares.</p>
 
-<p>As I mentioned in the previous part, cyclic groups are abelian, every element commutes with each other, thus in the commutator plot we will have</p>
+<p>As I mentioned in the previous part, cyclic groups are abelian, every element commutes with each other, thus in the commutativity plot we will have</p>
 <ul>
   <li>a fully blue plot</li>
   <li>conjugacy classes of size 1.</li>
 </ul>
 
-<p>As an example see below the (pretty boring) commutator plot for the $C_4$ group.</p>
+<p>As an example see below the (pretty boring) commutativity plot for the $C_4$ group.</p>
 <center>
 <img src="/assets/images/c4-commute.png" width="60%" />
 </center>
@@ -192,7 +192,7 @@ Two elements, $g, h \in G$ commute when $hg = gh$. This is the same as saying $g
     <tr>
       <th>Conjugation</th>
       <th>Group acting on <em>itself</em> by conjugation</th>
-      <th>Commutator plot</th>
+      <th>commutativity plot</th>
     </tr>
   </thead>
   <tbody>
@@ -256,7 +256,7 @@ Z = \begin{pmatrix} 1 &amp; 0 \\
 
 <h2 id="apply-the-probability-that-two-elements-commute">[apply] The probability that two elements commute</h2>
 
-<p>The commutator plot almost intuitively leads to this question: how dense can the blue squares be? In probabilistic terms, the proportion of the blue vs the full area is equivalent to the probability that two random elements commute from $G$. Of course, we are interested in non-abelian groups, as abelian groups have a boring full-blue plot. In the case of $S_6$, the plot becomes very large (6! x 6!), but we can see that it is very sparse (also has some cool structure in there):</p>
+<p>The commutativity plot almost intuitively leads to this question: how dense can the blue squares be? In probabilistic terms, the proportion of the blue vs the full area is equivalent to the probability that two random elements commute from $G$. Of course, we are interested in non-abelian groups, as abelian groups have a boring full-blue plot. In the case of $S_6$, the plot becomes very large (6! x 6!), but we can see that it is very sparse (also has some cool structure in there):</p>
 
 <center>
 <a href="/assets/images/s6-commute.png" target="blank"><img src="/assets/images/s6-commute.png" width="60%" /></a>
@@ -349,5 +349,13 @@ p(g,h \in G \text{ commute}) \leq 1/4  + \frac{|G|-|Z(G)|}{|G|}1/2 \leq 1/4 + (1
     </div>
 </div>
 <script>hljs.highlightAll();</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-49396309-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-49396309-2');
+</script>
 </body>
 </html>
