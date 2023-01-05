@@ -1,14 +1,561 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-01-16T14:28:07-05:00</updated><id>http://localhost:4000/feed.xml</id><entry><title type="html">Why are there so few quantum algorithms?</title><link href="http://localhost:4000/blog/2022/01/16/qsvt01-qsp/" rel="alternate" type="text/html" title="Why are there so few quantum algorithms?" /><published>2022-01-16T00:00:00-05:00</published><updated>2022-01-16T00:00:00-05:00</updated><id>http://localhost:4000/blog/2022/01/16/qsvt01-qsp</id><content type="html" xml:base="http://localhost:4000/blog/2022/01/16/qsvt01-qsp/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-01-04T19:40:55-05:00</updated><id>http://localhost:4000/feed.xml</id><entry><title type="html">Introduction to the structure of free operations in the resource theories of entanglement and magic</title><link href="http://localhost:4000/blog/2023/01/01/magic-and-entanglement/" rel="alternate" type="text/html" title="Introduction to the structure of free operations in the resource theories of entanglement and magic" /><published>2023-01-01T00:00:00-05:00</published><updated>2023-01-01T00:00:00-05:00</updated><id>http://localhost:4000/blog/2023/01/01/magic-and-entanglement</id><content type="html" xml:base="http://localhost:4000/blog/2023/01/01/magic-and-entanglement/">&lt;h2 id=&quot;prelude&quot;&gt;Prelude&lt;/h2&gt;
+
+&lt;p&gt;After three semesters into grad school, I’m realizing that my initial lofty goals of keeping a blog is not going to happen easily. I just prioritize everything else (homework, classes, research, private life) over it. However, I still generate some form of written material - final projects in classes. So, for the next two semesters (of my last three classes), I’m just going to put down here my final projects in the form of blog posts. As final projects are typically done in a rush, I’ll probably clean them up a bit in the process of translating them to markdown from LaTeX.&lt;/p&gt;
+
+&lt;p&gt;This particular write-up was for my 2022 Fall semester Quantum Information Theory class taught by Professor Iman Marvian.&lt;/p&gt;
+
+&lt;h2 id=&quot;abstract&quot;&gt;Abstract&lt;/h2&gt;
+
+&lt;p&gt;Resource theories formalize the notion of valuable resources. A quantum resource theory identifies “free states” that can be created with “free operations” - these are “easy” relative to assumed capabilities. To create “resource states”, one must either have states that contain “some” of the resource or use resource-generating operations. The theory of entanglement (where the resource is entanglement) and the theory of magic (where the resource is “non-stabilizerness”, or “magic”) share a similar structure through the lens of resource theory. Our main focus is a particular hierarchical structure of free operations, namely, the gap between the operational definition and the axiomatic definition of these classes of operations. For entanglement, this is the gap between the classes of Local Operations and Classical Communication (LOCC) and Separable Operators. In the case of magic, the gap is between the classes of Stabilizer Operators and Completely Stabilizer Preserving operators. These gaps have potential implications for protocols related to entanglement and magic state distillation.&lt;/p&gt;
+
+&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+
+&lt;p&gt;The majority of physical theories establish laws based on experimental observations of nature and predict behavior for situations that were not yet verified experimentally. Resource theories in contrast have an inherent process-, or engineering focus as they examine what is possible given a demarcation line in operational capabilities. With roots in Carnot’s explorations of how to exploit thermodynamic non-equilibrium as a resource for heat engines, resource theories provide a framework to organize the concepts and questions of availability and quantification of resources, conversion rates, reversibility, and more. At the core of a quantum resource theory, a set of operations is defined to be the &lt;em&gt;free operations&lt;/em&gt;, or &lt;em&gt;resource-non-generating&lt;/em&gt; (RNG) operations, and a set of states defined to be the &lt;em&gt;free states&lt;/em&gt;. The intuition is that RNG operations and free states are the “easy ones”, i.e. assumed to be available to acquire without incurring high costs. This is in contrast to valuable &lt;em&gt;dynamic resources&lt;/em&gt; (resource generating operations), i.e. operations generating &lt;em&gt;static resources&lt;/em&gt; (resource states) which are “hard” to acquire. &lt;a class=&quot;citation&quot; href=&quot;#chitambar_quantum_2019&quot;&gt;(Chitambar &amp;amp; Gour, 2019)&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;While there are numerous quantum resource theories, the two we are interested in in this report are the theories of entanglement and magic. It is well known that quantum entanglement can be used as a &lt;em&gt;resource&lt;/em&gt; for communication to extend our capabilities and open up use cases like super-dense coding or quantum teleportation &lt;a class=&quot;citation&quot; href=&quot;#wilde_quantum_2017&quot;&gt;(Wilde, 2017)&lt;/a&gt;. These use cases would be impossible with the “free” separable states, and &lt;em&gt;Local Quantum Operations and Classical Communication&lt;/em&gt; (LOCC).&lt;/p&gt;
+
+&lt;p&gt;Magic is a resource for universal fault-tolerant quantum computation (FTQC). Under the stabilizer formalism &lt;a class=&quot;citation&quot; href=&quot;#gottesman_stabilizer_1997&quot;&gt;(Gottesman, 1997)&lt;/a&gt;, large classes of Quantum Error Correction codes can be expressed for both storing and fault tolerantly executing quantum computation in the logical space of these codes. However, stabilizer operations are not universal in the quantum sense, and in-fact are classically efficiently simulatable, as stated by the Gottesman-Knill theorem (missing reference). The term “magic” was introduced in &lt;a class=&quot;citation&quot; href=&quot;#bravyi_universal_2005&quot;&gt;(Bravyi &amp;amp; Kitaev, 2005)&lt;/a&gt;, where Bravyi and Kitaev showed that for universal quantum computation, one has to inject the valuable resource of &lt;em&gt;magic states&lt;/em&gt; or use non-stabilizer operations.&lt;/p&gt;
+
+&lt;p&gt;This report focuses on a particular aspect of resource theories of magic and entanglement, namely, the structure of free operations. Free operations are defined either axiomatically or operationally. The operational definition is usually the more natural, stemming from the assumed limitation on capabilities, and having a clear operational interpretation. Axiomatically defined free operations are more mathematically motivated, they have less clear operational meaning; they are the maximal set of operations that map free states to free states. The question we are interested in is whether the axiomatic class is larger or not than the operational one and if yes, what the implications may be.&lt;/p&gt;
+
+&lt;p&gt;In entanglement theory, the class of separable channels (SEP) are the axiomatically defined free operations and the operational ones are the LOCC operations. Chitambar et al. &lt;a class=&quot;citation&quot; href=&quot;#chitambar_increasing_2012&quot;&gt;(Chitambar et al., 2012)&lt;/a&gt; found an operationally interpretable measure of entanglement, that shows a 12.5% gap between SEP and LOCC. In the case of magic theory, a recent counterexample from Heimendahl et al. &lt;a class=&quot;citation&quot; href=&quot;#heimendahl_axiomatic_2022&quot;&gt;(Heimendahl et al., 2022)&lt;/a&gt; shows that the axiomatically defined class of free operations, Completely Stabilizer Preserving (CSP) is strictly larger than the operationally defined class of stabilizer operations (SO).&lt;/p&gt;
+
+&lt;p&gt;The structure of this paper is as follows: in &lt;a href=&quot;#basics-of-entanglement-and-stabilizer-theories&quot;&gt;Basics of entanglement and stabilizer theories&lt;/a&gt; we will cover the minimum prerequisite of notations and concepts to understand the separation of these two classes in these two theories. In &lt;a href=&quot;#the-structure-of-free-operations&quot;&gt;The structure of free operations&lt;/a&gt; we will then get into the details of the separation of these classes in the two theories and finally, in the &lt;a href=&quot;#discussion&quot;&gt;Discussion&lt;/a&gt;, we discuss the potential consequences and draw our conclusions.&lt;/p&gt;
+
+&lt;h1 id=&quot;basics-of-entanglement-and-stabilizer-theories&quot;&gt;Basics of entanglement and stabilizer theories&lt;/h1&gt;
+
+&lt;p&gt;In this section, we review the concepts and mathematical tools in our two theories of interest and establish notation, mostly following Wilde &lt;a class=&quot;citation&quot; href=&quot;#wilde_quantum_2017&quot;&gt;(Wilde, 2017)&lt;/a&gt; for the quantum information theoretical and entanglement-related concepts. To introduce the stabilizer formalism, we will follow multiple sources  (missing reference).&lt;/p&gt;
+
+&lt;h2 id=&quot;state-vector-and-density-matrix-representation-of-quantum-states&quot;&gt;State vector and density matrix representation of quantum states&lt;/h2&gt;
+
+&lt;p&gt;Quantum mechanics is inherently probabilistic in the sense that measurement outcomes on a system are defined by the amplitude square of a set of complex numbers (&lt;em&gt;probability amplitudes&lt;/em&gt;) that describe a state as defined by the Born rule. If we can describe the probability amplitudes of a quantum mechanical system with certainty, we call that state a &lt;em&gt;pure&lt;/em&gt; state. However, this is far from realistic, usually, we don’t know perfectly the description of a system. Thus, on top of the inherent “quantum probability distribution”, we might have an uncertainty of these amplitudes themselves, layering a “classical probability distribution” over the quantum probability, which we then call &lt;em&gt;mixed&lt;/em&gt; states (or noisy states).&lt;/p&gt;
+
+&lt;p&gt;Pure quantum states are represented as normalized vectors (or we can think of them as rays) in a potentially composite Hilbert space, i.e. one that allows for a structure of $\mathcal{H}=\otimes_{i=1}^n \mathcal{H}&lt;em&gt;i$ with each sub-Hilbert space having dimension $d_i$. We will only discuss cases where $d_i = d_j = d, \forall i, j$, i.e. $\mathcal{H}_i=\mathbb{C}^d$, and where $d$ is prime. When $d=2$, we talk about a Hilbert space of $n$ _qubit_s. If $d=3$, we call each subsystem a _qutrit&lt;/em&gt; and $d&amp;gt;3$ is the case of _qudit_s. We denote pure states in the Dirac notation as $\ket{\psi} \in \mathcal{H}$. The members of the computational basis for the $n$ qudit Hilbert space of $d$-dimensional qudits will be labeled by the elements of the vector space $\mathbb{F}_d^n$ over the finite field $\mathbb{F}_d$ (i.e. a $n$ length vector with elements 0 to $d-1$, with addition is modulo $d$).  For example $\ket{124} = \ket{1}\otimes \ket{2} \otimes  \ket{4} \in (\mathbb{C}^5)^{\otimes 3}$ is a 3-qudit state of dimension 5.&lt;/p&gt;
+
+&lt;p&gt;As for mixed states, we don’t know exactly which pure state a system is in, we can represent this lack of knowledge as a probability distribution $P_X$ over possible pure states $\ket{\psi_x}$. This ensemble of states and their probabilities ${(P_X(x), \ket{\psi_x})}$ affords a &lt;em&gt;density operator&lt;/em&gt; representation $\rho \equiv \sum_x p_X(x) \ketbra{\psi_x}$, where $\ketbra{\psi_x} \in \mathcal{L}(\mathcal{H})$ is the density operator for the pure state $\ket{\psi_x}$ defined by the outer product of $\ket{\psi_x}$ and $\bra{\psi_x} \equiv \ket{\psi_x}^\dagger$. We denote the set of square linear operators acting on $\mathcal{H}$ with $\mathcal{L}(\mathcal{H})$. A density operator is always positive semi-definite, denoted as $\rho \geq 0$,  and has unit trace, $\Tr{\rho}=1$. The set of density operators is denoted as $DO(\mathcal{H}) \subset \mathcal{L}(\mathcal{H})$.&lt;/p&gt;
+
+&lt;h2 id=&quot;describing-change-with-operators-and-quantum-channels&quot;&gt;Describing change with operators and quantum channels&lt;/h2&gt;
+
+&lt;p&gt;When the change in a system is noiseless, i.e. the system is closed, it is postulated to be a transformation $U \in \mathcal{L}(\mathcal{H})$ on the system that is &lt;em&gt;unitary&lt;/em&gt;, i.e. $UU^\dagger=I$. In the vector representation, the effect of $U$ is $\ket{\psi} \rightarrow U\ket{\psi}$, in the density operator formalism, it is $\rho \rightarrow U \rho U^\dagger$. We will make use of the generalizations of the Pauli group, which is generated by the Pauli-X and Pauli-Z operators for a single qubit, with their action on the computational basis:&lt;br /&gt;
+\begin{align}
+X\ket{k}=\ket{k+1} \ \ ,  Z\ket{k}=(-1)^{k}\ket{k}, k\in \mathbb{F}_2.
+\end{align}&lt;/p&gt;
+
+&lt;p&gt;The generalized $n$-qudit Pauli-group for $d$ dimension qudits is generated by the generalized $n$-qudit X and Z operators, with action:&lt;/p&gt;
+
+&lt;p&gt;\begin{align}
+X(x)\ket{k}=\ket{k+x} \ \ ,  Z(z)\ket{k}=\omega^{k \cdot z}\ket{k}, x,z,k\in \mathbb{F}_d^n.
+\end{align}&lt;/p&gt;
+
+&lt;p&gt;, where $\omega = e^{i2\pi/d}$ is the $d$th root of unity and $k \cdot z = \sum_{i=1}^{n} k_i z_i$ is the inner product between $k$ and $z$.&lt;/p&gt;
+
+&lt;p&gt;However, in a realistic scenario, evolution is not perfectly known, and as such, it can be thought of as a probabilistic mixture of certain operators. Formally, we represent the most general type of evolution an experimenter can impart on a system with the &lt;em&gt;quantum channel&lt;/em&gt; formalism. A quantum channel is a map $\mathcal{N}&lt;em&gt;{A \rightarrow B}: \mathcal{L}(\mathcal{H}_A) \rightarrow \mathcal{L}(\mathcal{H}_B)$, that must map density operators to density operators, i.e. we have to make sure that the output operator $\rho_B := \mathcal{N}&lt;/em&gt;{A \rightarrow B}(\rho_A)$ has trace 1 and is positive. This leads to two mandatory properties. The first property a quantum channel has to satisfy is to be trace-preserving (TP), i.e. $\Tr{\rho_A}=\Tr{\rho_B}$. The second related to positivity is more subtle, namely that $\rho_B \geq 0$ is not enough, because positivity is not closed under the tensor product. Our map has to be &lt;em&gt;completely positive&lt;/em&gt; (CP), meaning that for a $\rho_A$ density operator on a system $A$, even if it is extended with an arbitrary reference system $R$ to a density operator $\rho_{AB}$, $(\mathcal{N}&lt;em&gt;{A \rightarrow B} \otimes id_R) (\rho&lt;/em&gt;{AB}) \geq 0$, i.e. the total system stays positive semi-definite. Both of these properties can be tested via the Choi-Jamiokołwski representation of a channel $\mathcal{E}$:&lt;/p&gt;
+
+&lt;p&gt;\begin{align}
+J(\mathcal{E}) := (\mathcal{E} \otimes id_n)(\ketbra{\phi^+}),
+\end{align}&lt;/p&gt;
+
+&lt;p&gt;, where $\ket{\phi^+}:=d^{-n} \sum_{x \in \mathbb{F}_d^n} \ket{xx}$ is the maximally entangled bipartite state on $2n$ $d$-qudits in the computational basis, and $id_n$ is the identity channel acting on the Hilbert space of $n$ $d$-qudits. 
+Namely, $\mathcal{E}$ is TP if and only if $Tr(J(\mathcal{E})) = 1$, and $\mathcal{E}$ is CP if and only if $J(\mathcal{E}) \geq 0$.&lt;/p&gt;
+
+&lt;p&gt;We will use the Kraus representation of a quantum channel $\mathcal{E}$, where, for a set of operators called Kraus operators ${M_i}$, such that they are &lt;em&gt;complete&lt;/em&gt;, i.e. $\sum_i M_i^\dagger M_i = I$, the channel’s effect is expressed as&lt;/p&gt;
+
+&lt;p&gt;\begin{align}
+\mathcal{E}(\rho)=\sum_i M_i \rho M_i^\dagger.
+\end{align}&lt;/p&gt;
+
+&lt;p&gt;Measurement of an &lt;em&gt;observable&lt;/em&gt; can be described as a quantum channel. An observable $M$ is a Hermitian operator, $M^\dagger=M$, and thus has a spectral decomposition, say $M=\sum_i \lambda_i \ketbra{\phi_i}$, where $\lambda_i \in \mathbb{R}$ are the eigenvalues and $\ket{\phi_i}$ are the corresponding eigenstates. When representing a measurement with this observable, the measurement outcomes are the eigenvalues, and after a certain eigenvalue $\lambda_i$ is observed, the system’s state will be projected to the corresponding eigensubspace (of dimension equal to the multiplicity of the eigenvalue), e.g. if $\lambda_i$ has multiplicity 1: $\rho \rightarrow \frac{\ketbra{\phi_i}\rho\ketbra{\phi_i}}{p_M(i)}$, where $p_M(i)=\Tr{\ketbra{\phi_i}\rho\ketbra{\phi_i}}$ is the probability of observing $\lambda_i$.&lt;/p&gt;
+
+&lt;p&gt;Finally, we can always find a &lt;em&gt;Stinespring dilation&lt;/em&gt; of a channel $\mathcal{E}&lt;em&gt;A$ acting on system $A$, which is a unitary $U&lt;/em&gt;{AR}$ on a larger bipartite system $AR$ such that on the subsystem $A$ its effect (i.e. after tracing out system $R$) is exactly the channel $\mathcal{E}_A$:&lt;/p&gt;
+
+&lt;p&gt;\begin{align}
+\mathcal{E}&lt;em&gt;A(\rho_A) = Tr_B{ U&lt;/em&gt;{AR}(\rho_A \otimes \ketbra{0}&lt;em&gt;R) U&lt;/em&gt;{AR}^\dagger }
+\end{align}&lt;/p&gt;
+
+&lt;p&gt;, where $\ketbra{0}_R$ is an arbitrary pure state picked from the reference subsystem $R$.&lt;/p&gt;
+
+&lt;h2 id=&quot;entanglement&quot;&gt;Entanglement&lt;/h2&gt;
+
+&lt;p&gt;A pure quantum state $\ket{\psi}&lt;em&gt;{AB}$ on a bipartite system $\mathcal{H}_A \otimes \mathcal{H}_B$ is called a _tensor product state&lt;/em&gt; (TPS) or &lt;em&gt;product state&lt;/em&gt; if it can be expressed as a tensor product of two local states: $\ket{\psi} = \ket{\psi}&lt;em&gt;A \otimes \ket{\psi}_B$. When there are no states local to the subsystems that can completely describe the state of a pure state, it is _entangled&lt;/em&gt;. A prototypical example is the Bell state, $\frac{\ket{00} + \ket{11}}{\sqrt{2}}$, the qubit case of $\ket{\phi^+}$.&lt;/p&gt;
+
+&lt;p&gt;In the case of mixed states, a density operator $\rho$ is called &lt;em&gt;separable&lt;/em&gt; if it is a convex combination of pure product states, i.e. $\rho = \sum_x p_X(x) \ketbra{\psi_x}&lt;em&gt;{A} \otimes  \ketbra{\psi_x}&lt;/em&gt;{B}$. We say that a mixed state is &lt;em&gt;entangled&lt;/em&gt; when it is not separable. The set of separable states is convex, i.e. $\forall \rho, \sigma$ separable, for all $\lambda \in [0,1] : \lambda \rho + (1-\lambda) \sigma$ is also separable.&lt;/p&gt;
+
+&lt;h2 id=&quot;stabilizer-formalism-and-magic&quot;&gt;Stabilizer formalism and magic&lt;/h2&gt;
+
+&lt;p&gt;The stabilizer formalism is an efficient way to represent certain subspaces and states in a Hilbert space. For the class of states called &lt;em&gt;stabilizer states&lt;/em&gt;, which we will define precisely in a moment, simulation and computation with &lt;em&gt;stabilizer operations&lt;/em&gt; (SO) become classically simulatable. This result is the Gottesman-Knill theorem &lt;a class=&quot;citation&quot; href=&quot;#gottesman_stabilizer_1997&quot;&gt;(Gottesman, 1997)&lt;/a&gt;, and one of its implications is that it identifies a large subset of quantum computing states and operations that are not classical but can be simulated efficiently classically. If one could simulate everything that a quantum computer can do, the field of quantum computing would be in trouble justifying their efforts. Fortunately, this is not the case, as in order to achieve &lt;em&gt;universality&lt;/em&gt;, one has to use extra resources: either use operations outside of the stabilizer operations or use a generous amount of special states called &lt;em&gt;magic states&lt;/em&gt;. While we will not need magic states in the later exposition, 
+ we remark that Bravyi and Kitaev &lt;a class=&quot;citation&quot; href=&quot;#bravyi_universal_2005&quot;&gt;(Bravyi &amp;amp; Kitaev, 2005)&lt;/a&gt; defined magic states as states that are any Clifford transformations of one of these two types of pure magic states:&lt;/p&gt;
+
+&lt;p&gt;&lt;span class=&quot;katex-error&quot; title=&quot;ParseError: KaTeX parse error: Expected &amp;#x27;EOF&amp;#x27;, got &amp;#x27;&amp;amp;&amp;#x27; at position 13:  \ketbra{T} &amp;amp;̲= \frac{1}{2}(I…&quot; style=&quot;color:#cc0000&quot;&gt;
+\ketbra{T} &amp;amp;= \frac{1}{2}(I + \frac{1}{\sqrt{3}}(X+Z+Y)) &lt;br /&gt;
+\ketbra{H} &amp;amp;= \frac{1}{2}(I + \frac{1}{\sqrt{2}}(X+Z)).
+&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;A state $\ket{\psi} \in \mathcal{H}$ is &lt;em&gt;stabilized&lt;/em&gt; by an $n$ qudit Hermitian Pauli operator $P \in \mathcal{P}_n(d)$ (Hermiticity is a requirement for it to be an observable) if the state is an eigenstate of it with +1 eigenvalue, i.e $P\ket{\psi} = \ket{\psi}$. For example $\ket{0}$ is stabilized by $Z$ and $\ket{+}$ is stabilized by $X$.&lt;/p&gt;
+
+&lt;p&gt;For two qubits, the situation changes, one might think that for a $\ket{00}$ state, $S_1:=Z_1Z_2$ would be sufficient, however, the +1 eigenspace of $Z_1Z_2$ is two dimensional, both $\ket{00}$ and $\ket{11}$ have +1 eigenvalues. We need then another operator to “filter out” the extra dimension but has $\ket{00}$ as its +1 eigenstate. We find that $S_2:=Z_1I_2$ is a good example. We can also notice that $S_1S_2 = I_1Z_2$, which is also a stabilizer for $\ket{00}$, and naturally $I_1I_2$ is also a stabilizer. The set ${S_1, S_2, S_1S_2, I}$ is a &lt;em&gt;group&lt;/em&gt;, that is closed under operator multiplication. Also, all of its members commute with each other (i.e. it’s &lt;em&gt;Abelian&lt;/em&gt;), thus they can be diagonalized simultaneously. Their shared +1 eigenspace is the &lt;em&gt;stabilized subspace&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;In general, we can represent an Abelian group of size $2^k$ with only $k$ independent elements, the &lt;em&gt;generators&lt;/em&gt;. An Abelian subgroup of the $n$-qudit Pauli group is called a &lt;em&gt;stabilizer group&lt;/em&gt; if it does not contain the element $- \mathbb{I}$ (to ensure that all stabilizers are Hermitian). As each generator “halves” the Hilbert space, we can see that a $k$ dimensional stabilizer group stabilizes an $n-k$ dimensional subspace. When $n=k$, we have a &lt;em&gt;stabilizer state&lt;/em&gt;. Single qubit stabilizer states are:&lt;/p&gt;
+
+&lt;p&gt;\begin{align&lt;em&gt;}
+Z: \ket{0} \ -Z: \ket{1} &lt;br /&gt;
+X: \ket{+} \ -X: \ket{-} &lt;br /&gt;
+Y: \ket{i} \ -Y: \ket{-i}
+\end{align&lt;/em&gt;}&lt;/p&gt;
+
+&lt;p&gt;, also $I$ stabilizes all states, and $-I$ stabilizes no states. For two-qubit states, $XX,ZZ$ stabilizes the Bell state, and in general, $\ket{\phi^+}$ is a stabilizer state. The set of $n-qubit$ stabilizer states is denoted as $STAB_n(2)$. Convex combinations of stabilizer states are &lt;em&gt;mixed stabilizer states&lt;/em&gt;, and they form &lt;em&gt;stabilizer polytope&lt;/em&gt;, denoted $SP_n(2):=convex(STAB_n(2))$. In the single qubit case, this is a simple octahedron on the Bloch sphere as displayed in Figure \ref{fig:stab_polytope}.&lt;/p&gt;
+
+&lt;p&gt;\begin{figure}[!ht]
+\center
+\includegraphics[scale=.3]{stab_polytope.png}
+\caption{The stabilizer polytope for single qubit stabilizer states. In higher dimensions, the polytope is more complex.}
+\label{fig:stab_polytope}
+\end{figure}&lt;/p&gt;
+
+&lt;p&gt;An $n$-qubit Pauli operator can be represented by $2n+1$ bits, with 2 bits for each qubit for the choice of $X=10, Z=01, Y=11, I=00$ and 1 bit for the global phase, the sign $\pm$. Thus a stabilizer state can be described by $n$ $n$-qubit Pauli operators, and as such it requires only $2n^2 + n=O(n^2)$ bits. This polynomial cost is in sharp contrast with the $2^n$ complex numbers required to represent a general state.&lt;/p&gt;
+
+&lt;p&gt;Beyond the efficient representation of states, it is possible to efficiently update the state if we limit the set of operations to those that map stabilizer states to stabilizer states. As an $n$-qubit stabilizer state can be represented by $n$ $n$-qubit Pauli operators, we need these operators to map Pauli operators to Pauli operators. The largest set of unitary operators that satisfy this criterion is the Clifford group, $Cl_n(2)$, generated by the $H$, $CNOT$, and the $S=\sqrt{Z}$ gates. Gottesman and Knill showed that a polynomial number of operations is sufficient to simulate Clifford operations or Pauli measurements.&lt;/p&gt;
+
+&lt;h1 id=&quot;the-structure-of-free-operations&quot;&gt;The structure of free operations&lt;/h1&gt;
+
+&lt;p&gt;In this section, we will review how the structure of free operations has a gap between axiomatic and operational definitions. In the case of entanglement, after a quick descriptive example for separation from Bennett et al. &lt;a class=&quot;citation&quot; href=&quot;#bennett_quantum_1999&quot;&gt;(Bennett et al., 1999)&lt;/a&gt;, we follow Chitambar et al. &lt;a class=&quot;citation&quot; href=&quot;#chitambar_increasing_2012&quot;&gt;(Chitambar et al., 2012)&lt;/a&gt; and for magic, the work by Heimendahl et al.  &lt;a class=&quot;citation&quot; href=&quot;#heimendahl_axiomatic_2022&quot;&gt;(Heimendahl et al., 2022)&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;entanglement-locc-subset-sep&quot;&gt;Entanglement: $LOCC \subset SEP$&lt;/h2&gt;
+
+&lt;p&gt;As mentioned before, in entanglement theory, the operational and axiomatic classes of RNG operations are the LOCC and the Separable (SEP) channels. 
+\begin{definition}&lt;em&gt;A channel $\mathcal{E&lt;/em&gt;$ on a Hilbert space of $N$ qudits is a \textbf{separable channel} if it has a Kraus decomposition with separable Kraus operators, i.e.: 
+\begin{align}
+\mathcal{E}(\rho) = \sum_l A_l \rho A_l^\dagger, A_l = M_{1,i} \otimes M_{2,i} \otimes \ldots \otimes M_{N,i}.
+\end{align}}&lt;/p&gt;
+
+&lt;p&gt;The set of separable channels is denoted SEP.
+\end{definition}&lt;/p&gt;
+
+&lt;p&gt;An early example by Bennett et al. &lt;a class=&quot;citation&quot; href=&quot;#bennett_quantum_1999&quot;&gt;(Bennett et al., 1999)&lt;/a&gt; shows the separation between these two classes, which shows “non-locality without entanglement”. In Figure \ref{fig:dominos} we can see 9 states in a domino notation. Alice and Bob both have a qutrit and they can be in one of the 9 states. They are each a bipartite, separable state and mutually orthogonal to each other. However, in order to distinguish them, one has to do a non-local measurement. To create the states we have to use Separable channels. Let $\ket{\psi_i}$ denote the 9 states. Then, the measurement that can distinguish these states can be represented by the Kraus representation $S(\rho)=\sum_i S_i \rho S_i^\dagger$, where: 
+\begin{align}
+S_i = \ket{i}_A \ket{i}_B\bra{\psi_i}. 
+\end{align}&lt;/p&gt;
+
+&lt;p&gt;\begin{figure}[!ht]
+\center
+\includegraphics[scale=.4]{dominos.png}
+\caption{The 9 orthogonal states on the two-qutrit Hilbert space are all separable but only distinguishable by non-local measurements, and  indistinguishable locally.}
+\label{fig:dominos}
+\end{figure}&lt;/p&gt;
+
+&lt;p&gt;An intuition around how local measurements would act here is that they would always “cut” at least one of the dominoes “in half”, which would make those states indistinguishable. It is laboriously derived and carefully argued in  &lt;a class=&quot;citation&quot; href=&quot;#bennett_quantum_1999&quot;&gt;(Bennett et al., 1999)&lt;/a&gt; that this measurement operator cannot be implemented by LOCC operations (however, it can be prepared locally!), on the other hand, it is clearly a separable channel. Thus, $LOCC \subset SEP$.&lt;/p&gt;
+
+&lt;p&gt;The seminal work from Bennett et al. also quantified the gap, but only to the order of $10^{-6}$. A central objective of the approach by &lt;a class=&quot;citation&quot; href=&quot;#chitambar_increasing_2012&quot;&gt;(Chitambar et al., 2012)&lt;/a&gt; was to quantify this gap and define a measure of entanglement that can have a significant difference between the two classes. They managed to show a 12.5% gap using a measure that also has an operational interpretation.&lt;/p&gt;
+
+&lt;p&gt;\begin{definition} &lt;em&gt;Suppose we have an arbitrary state $\rho \in DO(\mathcal{H&lt;/em&gt;)$, and a set of LOCC transformations, each executed with probability $p_i$, converting $\rho$ into $\rho_i$. Then, we call a function $\mu: DO(\mathcal{H}) \rightarrow \mathbb{R}$ an \textbf{entanglement monotone}, when it satisfies the following inequality: 
+\begin{align}
+\mu(\rho) \leq \sum_i p_i \mu(\rho_i)
+\end{align}
+}
+\end{definition}&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Chitambar et al. defined a monotone that measures the success rate of a particular task: random-EPR pair distillation from  W-class states. W-class states are any state that is obtainable from the $\ket{W}=\frac{1}{\sqrt{3}}(\ket{100}+\ket{010}+\ket{001})$ state with LOCC operations and can be parameterized as $\sqrt{x_0}&lt;/td&gt;
+      &lt;td&gt;000\rangle + \sqrt{x_A}&lt;/td&gt;
+      &lt;td&gt;100\rangle + \sqrt{x_B}&lt;/td&gt;
+      &lt;td&gt;010\rangle + \sqrt{x_C}&lt;/td&gt;
+      &lt;td&gt;001\rangle$. Due to normalization $x_0$ is fully determined by $1=x_0+x_A+x_B+x_C$, thus we will label W-class states as $\vec{x}={x_A,x_B,x_C}$. In random-EPR pair distillation, one uses a protocol to transform an initial W-class state to random singlet states $\ket{\psi}_ij=\frac{1}{\sqrt{2}}(&lt;/td&gt;
+      &lt;td&gt;01\rangle_{ij} +&lt;/td&gt;
+      &lt;td&gt;10\rangle_{ij})}$ between any two of the 3 parties as shown in Figure \ref{fig:epr}.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;\begin{figure}[!ht]
+\center
+\includegraphics[scale=.4]{epr.png}
+\caption{Random-EPR pair distillation from a W-class state.}
+\label{fig:epr}
+\end{figure}&lt;/p&gt;
+
+&lt;p&gt;For  $\vec{x}={x_A,x_B,x_C}$, let ${n_1,n_2,n_3}$ be a labeling of ${A,B,C}$ so that $x_{n_1} \geq x_{n_2} \geq x_{n_3}$. Then, the function 
+\begin{align}
+\kappa(\vec{x}) := 2(x_{n_2} + x_{n_3}) - \frac{x_{n_2}x_{n_3}}{x_{n_1}} 
+\end{align}&lt;/p&gt;
+
+&lt;p&gt;is an entanglement monotone that strictly decreases on average when a party with maximum component value makes a measurement by Theorem 1 in &lt;a class=&quot;citation&quot; href=&quot;#chitambar_increasing_2012&quot;&gt;(Chitambar et al., 2012)&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The function $\kappa(\vec{x})$ can reach 1 if and only if $x_{n_1}=x_{n_2}$ and $x_0=0$, and thus $p_{AB}+p_{BC}+p_{AC}\leq \kappa(\vec{x})$ for any $\vec{x}$ - thus we have an upper bound on the total probability of the success rate for the random-EPR distillation of $\vec{x}$. Interestingly, by Theorem 2. in &lt;a class=&quot;citation&quot; href=&quot;#chitambar_increasing_2012&quot;&gt;(Chitambar et al., 2012)&lt;/a&gt;, for a class of $x_{n_3} &amp;gt; x_0=0$ states, the success rate of LOCC operations can get arbitrarily close to this bound, for any $\epsilon&amp;gt;0$, $p_{AB}+p_{BC}+p_{AC}&amp;gt;\kappa(\vec{x})-\epsilon$, but no LOCC operation can exactly reach $\kappa(\vec{x})$.&lt;/p&gt;
+
+&lt;p&gt;The situation is different for SEP channels as there exists a set of separable measurement operators that can randomly distill a three-qubit W-class state with $x_0=0, 1/2 \geq x_A \geq x_B \geq x_C$ with probability one:&lt;/p&gt;
+
+&lt;p&gt;\begin{align}
+M_{AB} &amp;amp;= (\lambda_{CB} \ketbra{0} + \ketbra{1}) \otimes (\lambda_{CA} \ketbra{0} + \ketbra{1}) \otimes \ketbra{0} &lt;br /&gt;
+M_{AC} &amp;amp;= (\lambda_{BC} \ketbra{0} + \ketbra{1}) \otimes \ketbra{0} \otimes (\lambda_{BA} \ketbra{0} + \ketbra{1}) &lt;br /&gt;
+M_{BC} &amp;amp;= \ketbra{0} \otimes (\lambda_{AC} \ketbra{0} + \ketbra{1}) \otimes  (\lambda_{AB} \ketbra{0} + \ketbra{1}) &lt;br /&gt;
+M_{000} &amp;amp;= (1-\lambda_{CA}^2\lambda_{CB}^2-\lambda_{BA}^2\lambda_{BC}^2-\lambda_{AB}^2\lambda_{AC}^2)^{1/2}\ketbra{000} &lt;br /&gt;
+M_{111} &amp;amp;= \ketbra{111}
+\end{align}&lt;/p&gt;
+
+&lt;p&gt;, where $\lambda_{ij}=\sqrt{\frac{1-2x_i}{2x_j}}$.&lt;/p&gt;
+
+&lt;p&gt;The example where the 12.5% difference shows up is the following family of states parameterized by $\frac{1}{3} \leq s \leq \frac{1}{2}$:&lt;/p&gt;
+
+&lt;p&gt;\begin{align}
+\sqrt{s} \ket{100} + \sqrt{\frac{1-s}{2}}(\ket{010}+\ket{001}) \label{eq:param-w-class}
+\end{align}&lt;/p&gt;
+
+&lt;p&gt;While the SEP probability is 1, the LOCC probability is bound by $\kappa(\vec{x}) = 2(1-s)-\frac{(1-s)^2}{4}$. We plot the two functions in Figure \ref{fig:kappas}, where the separation is clearly visible.&lt;/p&gt;
+
+&lt;p&gt;\begin{figure}[!ht]
+\center
+\includegraphics[scale=.4]{kappas.png}
+\caption{Maximum probability of generating EPR pairs from a parameterized W-class state defined in \ref{eq:param-w-class}.}
+\label{fig:kappas}
+\end{figure}&lt;/p&gt;
+
+&lt;h2 id=&quot;stabilizer-formalism-so_nd-subset-csp&quot;&gt;Stabilizer formalism: $SO_n(d) \subset CSP$&lt;/h2&gt;
+
+&lt;p&gt;The operationally defined set of free operations in the stabilizer formalism is the Stabilizer Operators. We will formally define them here. All the above concepts in Section \ref{sec:basics} including the Pauli group $\mathcal{P}_n(d)$, the stabilizer group $S$, the Clifford group $Cl_n(d)$, and stabilizer states STAB($d,n$) readily generalize from qubits to qudits as described in  &lt;a class=&quot;citation&quot; href=&quot;#heimendahl_axiomatic_2022&quot;&gt;(Heimendahl et al., 2022)&lt;/a&gt;. Our formal definitions then will be stated using qudits:&lt;/p&gt;
+
+&lt;p&gt;\begin{definition} 
+&lt;em&gt;A quantum channel mapping $n$ $d$-qudits to $m$ $d$-qudits, for prime dimension $d$, is defined as a \textbf{Stabilizer operation&lt;/em&gt; when it is a concatenation of operations that fall into one of the following categories:
+\begin{itemize}
+\item preparation of qudits in stabilizer states 
+\item application of a Clifford unitary
+\item measurement of a Pauli observable
+\item discarding of qudits
+\end{itemize}
+Beyond the above, arbitrary random functions of previous measurement results can act as classical logic to decide which quantum operation to do in each step. 
+}
+\end{definition}&lt;/p&gt;
+
+&lt;p&gt;We are taking the stabilizer polytope for $n$-qudits of $d$ dimension, $SP_n(d)$ to be the set of free states. Then, the axiomatically defined RNG operations are the ones that map the stabilizer-polytope to itself. Similar to positivity, in some resource theories, these channels are not closed under tensor product. In order to enforce closeness under tensor product, the set of &lt;em&gt;completely&lt;/em&gt;-RNG channels are of interest - in our case the Completely Stabilizer Preserving (CSP) channels, which - for any arbitrary $k$ dimensional extension, maps the $n+k$ dimensional stabilizer polytope to the $m+k$ dimensional stabilizer polytope:&lt;/p&gt;
+
+&lt;p&gt;\begin{definition}
+&lt;em&gt;A linear superoperator $\mathcal{E&lt;/em&gt;$ mapping $n$ and $m$ qudit spaces of $d$ dimension is \textbf{Completely Stabilizer Preserving} if and only if $\mathcal{E} \otimes id_k (SP_{n+k}(d)) \subset SP_{m+k}(d)$ for all $k \in \mathbb{N}$.  }
+\end{definition}&lt;/p&gt;
+
+&lt;p&gt;A CSP operator is also CPTP &lt;a class=&quot;citation&quot; href=&quot;#heimendahl_axiomatic_2022&quot;&gt;(Heimendahl et al., 2022)&lt;/a&gt;, thus they are legitimate quantum channels. How can we determine whether a stabilizer-preserving channel $\mathcal{E}$ is also CSP? An interesting result &lt;a class=&quot;citation&quot; href=&quot;#seddon_quantifying_2019&quot;&gt;(Seddon &amp;amp; Campbell, 2019)&lt;/a&gt; utilizes the Choi operator to prove that if the Choi operator (which can be looked at as a state) of $\mathcal{E}$ is stabilizer-preserving and trace-preserving, then $\mathcal{E}$ is CSP.&lt;/p&gt;
+
+&lt;p&gt;With the definitions out of the way, let’s look at the main result by Heimendahl et al. For the single qudit (qubit) case, $SO_1(d)= CSP_1(d)$. This is intuitively reasonable, as  However, starting from two qubits, CSP is strictly larger than SO. Heimendahl et al used the following channel as a counterexample to prove the separation between $SO_2(2)$ and $CSP_2(2)$:&lt;/p&gt;
+
+&lt;p&gt;\begin{align}
+\Lambda(\rho) = \rho_{00} \ketbra{++} + \sum_{x \in {01, 10, 11}} \rho_{x,x} \ketbra{x} + \frac{1}{2} \sum_{\substack{x,y \in {01, 10, 11} \ x\neq y}} \rho_{x,y}\ket{x}\bra{y}
+\end{align}&lt;/p&gt;
+
+&lt;p&gt;, where $\rho_{x,y}=\bra{x} \rho \ket{y}$.&lt;/p&gt;
+
+&lt;p&gt;This channel can be written as the following three operations:
+\begin{enumerate}
+\item  measure a projective measurement that distinguishes between $\ket{00}$ and the subspace spanned by $\ket{01},\ket{10},\ket{11}$, i.e. $\ket{00}^\perp$. This operation cannot be implemented using stabilizer operations. This makes the density matrix block-diagonal: 
+\begin{align}
+\begin{pmatrix}
+\rho_{00} &amp;amp; 0 &amp;amp; 0 &amp;amp; 0 &lt;br /&gt;
+0 &amp;amp; \rho_{01,01} &amp;amp; \rho_{01,10} &amp;amp; \rho_{01,11} &lt;br /&gt;
+0 &amp;amp; \rho_{10,01} &amp;amp; \rho_{10,10} &amp;amp; \rho_{10,11} &lt;br /&gt;
+0 &amp;amp; \rho_{11,01} &amp;amp; \rho_{11,10} &amp;amp; \rho_{11,11} 
+\end{pmatrix}
+\end{align}
+\item Apply partial dephasing with probability 1/2. Off-diagonal terms become half their size: 
+\begin{align}
+\begin{pmatrix}
+\rho_{00} &amp;amp; 0 &amp;amp; 0 &amp;amp; 0 &lt;br /&gt;
+0 &amp;amp; \rho_{01,01} &amp;amp; \rho_{01,10}/2 &amp;amp; \rho_{01,11}/2 &lt;br /&gt;
+0 &amp;amp; \rho_{10,01}/2 &amp;amp; \rho_{10,10} &amp;amp; \rho_{10,11}/2 &lt;br /&gt;
+0 &amp;amp; \rho_{11,01}/2 &amp;amp; \rho_{11,10}/2 &amp;amp; \rho_{11,11} 
+\end{pmatrix}
+\end{align}
+\item Depending on the outcome of the measurement, apply Hadamard on both qubits if $\ket{00}$ was observed. At this point, we get the expression for $\Lambda(\rho)$. 
+\end{enumerate}&lt;/p&gt;
+
+&lt;p&gt;It is possible to show that all three steps are necessary for the channel to be CSP but not SO. In a bit more intuitive explanation, in the geometry of the space of channels, after the first step, we are outside of the CSP class (which is also a polytope). The dephasing step removes sufficient “magic” from the channel to make it CSP and the Hadamard at the end sets the direction the CSP polytope is being approached from to make the channel a vertex.&lt;/p&gt;
+
+&lt;p&gt;We will introduce the notion of a Clifford dilation for the sketch of the proof. 
+A superoperator $\mathcal{E}$ mapping $n$ and $m$ qudit spaces of $d$ dimension has a Clifford dilation if there exists a number $k$, a stabilizer state $\ket{s} \in SP_k(d)$ and a Clifford unitary $U$ on $n+k$ qudits such that: 
+\(\mathcal{E}(\rho) = Tr_{m+1,...n+k}\{U(\rho \otimes \ketbra{s})U^\dagger\}\)&lt;/p&gt;
+
+&lt;p&gt;The channels that have a Clifford dilation are the ones that have no measurements or classical randomness.&lt;/p&gt;
+
+&lt;p&gt;The sketch of the proof is the following: 
+\begin{enumerate}
+\item it is shown that $\Lambda$ is an &lt;em&gt;almost-diagonal channel&lt;/em&gt;, meaning that it belongs to $AD_2$ that is defined by its effect on the computational basis states: 
+\begin{align}
+\mathcal{E}(\ketbra{00})=\ketbra{++}, \mathcal{E}(\ketbra{x})=\ketbra{x}, x \in \ket{00}^\perp
+\end{align}
+\item This property is then used to show that $\Lambda$ is extremal in $CS_2$. From here, if $\Lambda$ is a stabilizer operation, then it would follow that it is an extremal point in $SO_2$ as well. This is due to convex subsets inheriting the extremality of points from their supersets. 
+\item It is shown that extremal points in $SO_2$ do not have a Clifford dilation.
+\item However, it can be proved that $\Lambda$ cannot have a Clifford dilation - thus it must be that $\Lambda \in CSP_2$ but $\Lambda \notin SO_2$
+\end{enumerate}&lt;/p&gt;
+
+&lt;p&gt;For larger qubit and qudit dimensions we refer the reader to &lt;a class=&quot;citation&quot; href=&quot;#heimendahl_axiomatic_2022&quot;&gt;(Heimendahl et al., 2022)&lt;/a&gt;. For the full picture though, it is worth mentioning that for larger dimensional qudit states even $CSP_n(d)$ might not be maximal in terms of free operations. For $d$ odd dimensions, resource theories of magic use the Wigner function representation of a function. This is a quasi-probability distribution in phase-space and its total negativity is a magic monotone called &lt;em&gt;mana&lt;/em&gt;. Thus, the set of free states can be enlarged to include those with positive Wigner functions, and channels that preserve the positivity of the Wigner function and do so closed under the tensor product are called the &lt;em&gt;completely&lt;/em&gt;-Wigner-positivity-preserving ($CWPP_n,m(d)$) channels. Thus in case of odd $d&amp;gt;2$ dimensions, the full hierarchy is $SO_{n,m}(d) \subset CSP_{n,m} \subseteq CWPP_{n,m}(d)$, where the last containment is conjectured to be proper by Heimendahl et al.&lt;/p&gt;
+
+&lt;h1 id=&quot;discussion&quot;&gt;Discussion&lt;/h1&gt;
+
+&lt;p&gt;Starting from the basics, we reviewed how the structure of the free operations in the theories of entanglement and magic are structured.  To explore entanglement, we looked at an early example by Bennett et al. that demonstrated measurement that is separable but not LOCC. Following Chitambar et al., we explored an entanglement monotone specifically designed to measure the maximum success of random-EPR distillation from W-class states, and how it can show a 12.5% gap between LOCC and SEP.&lt;/p&gt;
+
+&lt;p&gt;For the theory of magic, Heimendahl et al. did not work with magic monotones, instead, for 2-qubit states, they showed through a specific counter-example that is a completely stabilizer preserving operation but not a stabilizer operation. One could say that their result is similar in spirit to the Bennett et al. example, where careful arguments around a specific set of counterexamples demonstrate the separation of the two classes. Future work might explore actually quantifying the gap in this theory as well for magic distillation tasks. Further implications of the CSP / SO separation could be that the classically simulatable class of channels will become larger, beyond the Gottesman-Knill theorem.&lt;/p&gt;</content><author><name></name></author><summary type="html">Prelude</summary></entry><entry><title type="html">Variable length shots with Stim</title><link href="http://localhost:4000/blog/2022/09/05/stim/" rel="alternate" type="text/html" title="Variable length shots with Stim" /><published>2022-09-05T00:00:00-04:00</published><updated>2022-09-05T00:00:00-04:00</updated><id>http://localhost:4000/blog/2022/09/05/stim</id><content type="html" xml:base="http://localhost:4000/blog/2022/09/05/stim/">&lt;h1 id=&quot;background&quot;&gt;Background&lt;/h1&gt;
+
+&lt;p&gt;Stim is an excellent tool for sampling from stabilizer circuits. Stabilizer circuits are quantum algorithms that are made exclusively out of operators from the Clifford group, which is the normalizer of the Pauli group within the unitary group (meaning that conjugating Paulis with Cliffords results in Paulis, which means that you still get a Pauli even if you “commute it over a Clifford”). While this gate set is not universal, it is a great testing ground for stabilizer codes.&lt;/p&gt;
+
+&lt;h2 id=&quot;a-serial-qec-storage-simulation-workflow&quot;&gt;A serial QEC storage simulation workflow&lt;/h2&gt;
+&lt;p&gt;I found that reading most textbooks or papers, a serial kind of understanding of active quantum error correction schemes is the first that comes to mind. Our focus is storage simulation, i.e preserving quantum state in an error corrected memory. In a real quantum memory, after preparing a logical state, we run a loop of syndrome detection (sample), decoding a recovery operator (decode) and applying the recovery (either to a classical Pauli frame or to the device). In a simulation we are also interested whether our decoder was right. So, after a single sample, we decode, and we compare the predicted value of an observable (e.g. the value of logical $\bar{Z}$ for logical $|0\rangle$ state). A straightforward way to estimate the logical error rate is to repeat the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sample-decode-predict-compare&lt;/code&gt; steps a lot of times, divide the number of errors by the total sample count. Here a &lt;em&gt;lot&lt;/em&gt; could be $10^8$ to $10^9$ times for a single data point in a threshold diagram to get a trustworthy estimate.&lt;/p&gt;
+
+&lt;p&gt;It is quite natural to think of a simulation that follows in this serial spirit. From my small sample of QEC researchers, if they don’t work with stim, they follow an algorithm that is sketched out here for a CSS code:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Algorithm 1.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Round&lt;/th&gt;
+      &lt;th&gt;Frame In&lt;/th&gt;
+      &lt;th&gt;Measurement&lt;/th&gt;
+      &lt;th&gt;Syndrome&lt;/th&gt;
+      &lt;th&gt;Detector&lt;/th&gt;
+      &lt;th&gt;Frame out&lt;/th&gt;
+      &lt;th&gt;Notes&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;$0$&lt;/td&gt;
+      &lt;td&gt;$0$&lt;/td&gt;
+      &lt;td&gt;“Random” full syndrome&lt;/td&gt;
+      &lt;td&gt;$s_0^+ = E_0H$&lt;/td&gt;
+      &lt;td&gt;$\sigma_0^+ = s_0^+$&lt;/td&gt;
+      &lt;td&gt;$E_0$&lt;/td&gt;
+      &lt;td&gt;this sets the random gauge, we’ll land in one of the cosets of $\mathcal{C}$&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;$1^+$&lt;/td&gt;
+      &lt;td&gt;$E_0$&lt;/td&gt;
+      &lt;td&gt;Noisy full syndrome&lt;/td&gt;
+      &lt;td&gt;$s_1^+$&lt;/td&gt;
+      &lt;td&gt;$\sigma_1 = s_1 \oplus s_0^+$&lt;/td&gt;
+      &lt;td&gt;$E_0E_1$&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;$\ldots$&lt;/td&gt;
+      &lt;td&gt;$\ldots$&lt;/td&gt;
+      &lt;td&gt;$\ldots$&lt;/td&gt;
+      &lt;td&gt;$\ldots$&lt;/td&gt;
+      &lt;td&gt;$\ldots$&lt;/td&gt;
+      &lt;td&gt;$\ldots$&lt;/td&gt;
+      &lt;td&gt;$\ldots$&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;$i^+$&lt;/td&gt;
+      &lt;td&gt;$\prod_{k=0}^{i-1}E_k$&lt;/td&gt;
+      &lt;td&gt;Noisy full syndrome&lt;/td&gt;
+      &lt;td&gt;$s_i^+$&lt;/td&gt;
+      &lt;td&gt;$\sigma_i = s_i^+ \oplus s_{i-1}^+$&lt;/td&gt;
+      &lt;td&gt;$\prod_{k=0}^{i}E_k$&lt;/td&gt;
+      &lt;td&gt;the $i$th noisy measurement round&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;prepare logical zero (can be skipped if we are doing a Pauli frame propagation only experiment)&lt;/li&gt;
+  &lt;li&gt;measure $s_i$ syndrome every round, under the given noise model, until the syndrome history is acceptable by the “decoder”&lt;/li&gt;
+  &lt;li&gt;“decoder” determines recovery  $R^+$ based on the history&lt;/li&gt;
+  &lt;li&gt;this should put us in the codespace + the internal errors of the $i$th round + errors coming from the fact that we might have fixed the wrong error, if it was only partially detected&lt;/li&gt;
+  &lt;li&gt;we’d do a transversal $Z$ measurement (since our code is CSS) to the get the $X$-error frame&lt;/li&gt;
+  &lt;li&gt;we’d determine using classical decoding with $H_Z$ the ideal syndrome for the residual errors&lt;/li&gt;
+  &lt;li&gt;we’d get a final, ideal recovery operator $R^\circ$&lt;/li&gt;
+  &lt;li&gt;we’d measure the parity of the frame - to determine the true value of the observable - if parity = 1 we have an error&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;While this is a really flexible approach, and not too hard to implement a Pauli frame simulator that maintains the X and Z observable bits on each qubit, Craig Gidney uses a different approach in Stim, that enables an over 100-fold speedup the sampling part. While some of you might object that decoding still will be bottleneck, so why bother, I found several benefits to this approach.&lt;/p&gt;
+
+&lt;h2 id=&quot;offline-detector-decoding-with-stim&quot;&gt;Offline Detector Decoding with Stim&lt;/h2&gt;
+
+&lt;p&gt;I call the approach that is already visible in the &lt;a href=&quot;https://github.com/quantumlib/Stim/blob/main/doc/getting_started.ipynb&quot;&gt;Stim getting started guide&lt;/a&gt; “offline decoding”, because instead of repeating &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sample-decode-predict-compare&lt;/code&gt; serially. we do &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sample&lt;/code&gt; first and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;decode-predict-compare&lt;/code&gt; offline on the generated samples. The key to the large speedup compared to a bare bones Pauli frame simulator is due to vectorization using 256 bit wide AVX instructions. When one samples a circuit, for example $10^6$ times, the $10^6$ shots are executed in batches of Pauli frames. Leveraging the AVX instructions, each quantum operation costs only a single operation, while in effect they change all the Pauli frames in the batch. While this is not entirely true for randomized operations like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DEPOL1&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;X_ERROR&lt;/code&gt;, but Craig implemented speedups for those cases as well, using creative ways to sample from the binomial distribution.&lt;/p&gt;
+
+&lt;p&gt;The algorithm&lt;/p&gt;
+
+&lt;p&gt;The speedup per sample is a clear benefit, however, I see other&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;benefits:
+    &lt;ul&gt;
+      &lt;li&gt;speed&lt;/li&gt;
+      &lt;li&gt;testability&lt;/li&gt;
+      &lt;li&gt;data sharing&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;limitations&quot;&gt;Limitations&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;what if our rounds are of varying size?&lt;/li&gt;
+  &lt;li&gt;I spent months developing a direct QEC flow and then I sat down to work out this method&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;key-point&quot;&gt;Key point&lt;/h1&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Round&lt;/th&gt;
+      &lt;th&gt;Frame In&lt;/th&gt;
+      &lt;th&gt;Measurement&lt;/th&gt;
+      &lt;th&gt;Syndrome&lt;/th&gt;
+      &lt;th&gt;Detector&lt;/th&gt;
+      &lt;th&gt;Frame out&lt;/th&gt;
+      &lt;th&gt;Notes&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;$0^+$&lt;/td&gt;
+      &lt;td&gt;$0$&lt;/td&gt;
+      &lt;td&gt;“Random” full syndrome&lt;/td&gt;
+      &lt;td&gt;$s_0^+ = E_0H$&lt;/td&gt;
+      &lt;td&gt;$\sigma_0^+ = s_0^+$&lt;/td&gt;
+      &lt;td&gt;$E_0$&lt;/td&gt;
+      &lt;td&gt;this sets the random gauge, we’ll land in one of the cosets of $\mathcal{C}$&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;$0^+$&lt;/td&gt;
+      &lt;td&gt;$E_0$&lt;/td&gt;
+      &lt;td&gt;Noiseless logical $\bar{Z}$&lt;/td&gt;
+      &lt;td&gt;$l_0^+ = E_0 \cdot \bar{Z}$&lt;/td&gt;
+      &lt;td&gt;$\lambda_0^+ = l_0^+$&lt;/td&gt;
+      &lt;td&gt;$E_0$&lt;/td&gt;
+      &lt;td&gt;this also depends on the random gauge, can be 1 or 0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;$0^\circ$&lt;/td&gt;
+      &lt;td&gt;$E_0$&lt;/td&gt;
+      &lt;td&gt;Noiseless full syndrome&lt;/td&gt;
+      &lt;td&gt;$s_0^\circ$&lt;/td&gt;
+      &lt;td&gt;$\sigma_0^\circ = s_0^+ \oplus s_0^\circ$&lt;/td&gt;
+      &lt;td&gt;$E_0$&lt;/td&gt;
+      &lt;td&gt;for sanity checking, but also for consistent round structure, $s_0^+ = s_0^\circ$, thus $\sigma_0^\circ =0$&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;$0^\circ$&lt;/td&gt;
+      &lt;td&gt;$E_0$&lt;/td&gt;
+      &lt;td&gt;Noiseless logical $\bar{Z}$&lt;/td&gt;
+      &lt;td&gt;$l_0^+$&lt;/td&gt;
+      &lt;td&gt;$\lambda_0^\circ = l_0^+ \oplus l_0^\circ$&lt;/td&gt;
+      &lt;td&gt;$E_0$&lt;/td&gt;
+      &lt;td&gt;sanity check, $\lambda_0^+=0$ should hold&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;$1^+$&lt;/td&gt;
+      &lt;td&gt;$E_0$&lt;/td&gt;
+      &lt;td&gt;Noisy full syndrome&lt;/td&gt;
+      &lt;td&gt;$s_1^+$&lt;/td&gt;
+      &lt;td&gt;$\sigma_1 = s_1 \oplus s_0^+$&lt;/td&gt;
+      &lt;td&gt;$E_0E_1$&lt;/td&gt;
+      &lt;td&gt;the first truly noisy measurement after the setup.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;$1^+$&lt;/td&gt;
+      &lt;td&gt;$E_0E_1$&lt;/td&gt;
+      &lt;td&gt;Noiseless logical $\bar{Z}$&lt;/td&gt;
+      &lt;td&gt;$l_1^+$&lt;/td&gt;
+      &lt;td&gt;$\lambda_1^+ = l_0^\circ \oplus l_1^+$&lt;/td&gt;
+      &lt;td&gt;$E_0E_1$&lt;/td&gt;
+      &lt;td&gt;captures the parity of $\bar{Z}$ against the full residual error of measuring $s_1^+$&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;$1^\circ$&lt;/td&gt;
+      &lt;td&gt;$E_0E_1$&lt;/td&gt;
+      &lt;td&gt;Noiseless full syndrome&lt;/td&gt;
+      &lt;td&gt;$s_1^\circ$&lt;/td&gt;
+      &lt;td&gt;$\sigma_1^\circ = s_1^+ \oplus s_0$&lt;/td&gt;
+      &lt;td&gt;$E_0E_1$&lt;/td&gt;
+      &lt;td&gt;noiseless measurement for the ideal decoder in case we’d stop after 1 round&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;$1^\circ$&lt;/td&gt;
+      &lt;td&gt;$E_0E_1$&lt;/td&gt;
+      &lt;td&gt;Noiseless logical $\bar{Z}$&lt;/td&gt;
+      &lt;td&gt;$l_1^\circ$&lt;/td&gt;
+      &lt;td&gt;$\lambda_1^\circ = l_1^\circ \oplus l_1^+$&lt;/td&gt;
+      &lt;td&gt;$E_0E_1$&lt;/td&gt;
+      &lt;td&gt;sanity check &amp;amp; consistency $l_1^+=l_1^\circ$, thus, $\lambda_1^\circ=0$ always true&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;$\ldots$&lt;/td&gt;
+      &lt;td&gt;$\ldots$&lt;/td&gt;
+      &lt;td&gt;$\ldots$&lt;/td&gt;
+      &lt;td&gt;$\ldots$&lt;/td&gt;
+      &lt;td&gt;$\ldots$&lt;/td&gt;
+      &lt;td&gt;$\ldots$&lt;/td&gt;
+      &lt;td&gt;$\ldots$&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;$i^+$&lt;/td&gt;
+      &lt;td&gt;$\prod_{k=0}^{i-1}E_k$&lt;/td&gt;
+      &lt;td&gt;Noisy full syndrome&lt;/td&gt;
+      &lt;td&gt;$s_i^+$&lt;/td&gt;
+      &lt;td&gt;$\sigma_i = s_i^+ \oplus s_{i-1}^+$&lt;/td&gt;
+      &lt;td&gt;$\prod_{k=0}^{i}E_k$&lt;/td&gt;
+      &lt;td&gt;the $i$th noisy measurement round&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;$i^+$&lt;/td&gt;
+      &lt;td&gt;$\prod_{k=0}^{i}E_k$&lt;/td&gt;
+      &lt;td&gt;Noiseless logical $\bar{Z}$&lt;/td&gt;
+      &lt;td&gt;$l_i^+$&lt;/td&gt;
+      &lt;td&gt;$\lambda_i^+ = l_{i-1}^\circ \oplus l_i^+$&lt;/td&gt;
+      &lt;td&gt;$\prod_{k=0}^{i}E_k$&lt;/td&gt;
+      &lt;td&gt;captures the parity of $\bar{Z}$ against the full residual error of measuring $s_1^+$&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;$i^\circ$&lt;/td&gt;
+      &lt;td&gt;$\prod_{k=0}^{i}E_k$&lt;/td&gt;
+      &lt;td&gt;Noiseless full syndrome&lt;/td&gt;
+      &lt;td&gt;$s_i^\circ$&lt;/td&gt;
+      &lt;td&gt;$\sigma_i^\circ = s_i^+ \oplus s_{i-1}$&lt;/td&gt;
+      &lt;td&gt;$\prod_{k=0}^{i}E_k$&lt;/td&gt;
+      &lt;td&gt;noiseless measurement for the ideal decoder in case we’d stop after 1 round&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;$i^\circ$&lt;/td&gt;
+      &lt;td&gt;$\prod_{k=0}^{i}E_k$&lt;/td&gt;
+      &lt;td&gt;Noiseless logical $\bar{Z}$&lt;/td&gt;
+      &lt;td&gt;$l_i^\circ$&lt;/td&gt;
+      &lt;td&gt;$\lambda_i^\circ = l_i^\circ \oplus l_{i}^+$&lt;/td&gt;
+      &lt;td&gt;$\prod_{k=0}^{i}E_k$&lt;/td&gt;
+      &lt;td&gt;sanity check &amp;amp; consistency $l_i^+=l_i^\circ$, thus, $\lambda_i^\circ=0$ always true&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;We can look at the 0th round as the one preparing the zero logical state. In reality it prepares the coset of the codespace and a random logical state. But, because we will be looking at the cumulated errors from this point forward, we can allow this to be our point of reference, i.e. we are not interested in the “true” syndrome in the next rounds, but in the syndrome &lt;em&gt;relative to our initial gauge&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;In detector sampling mode, we only receive $\sigma_i$. However, it is easy to see, that any time we can reconstruct the $i$th syndrome by simply adding up the deltas, $s_i = \oplus_{k=0}^i \sigma_k$.&lt;/p&gt;
+
+&lt;p&gt;The true observable (relative to the gauge) value will the sum of logicals. The decoder will predict the observed logical&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Algorithm 2.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;state prep a random coset of the zero logical state (our gauge) by projecting with our syndrome measurements&lt;/li&gt;
+  &lt;li&gt;measure syndromes and auxiliary data until the noisy syndrome history is acceptable (time decoder only sees $s_i^+$)&lt;/li&gt;
+  &lt;li&gt;“space decoder” determines recovery  $R^+$ based on the history&lt;/li&gt;
+  &lt;li&gt;as we know the true logical observable parity, we can update it with the parity of the recovery operator $R^+ \cdot \bar{Z}$&lt;/li&gt;
+  &lt;li&gt;as $R^+H=s_i$ is guaranteed by a good decoder, we can emulate what syndrome an ideal decoder would measure after applying the $R^+$ by removing $s_i$ from the ideal syndrome $s_i^\circ$, i.e. we will use $\sigma_i^\circ$ to find $R^\circ$ with the space decoder&lt;/li&gt;
+  &lt;li&gt;we check the parity of $R^\circ \cdot Z$&lt;/li&gt;
+  &lt;li&gt;our final predicted observable parity is $R^\circ \cdot \bar{Z} \oplus R^+ \cdot \bar{Z} = R^+R^\circ \cdot \bar{Z}$&lt;/li&gt;
+  &lt;li&gt;if predicted parity != true parity, then we have an error&lt;/li&gt;
+&lt;/ol&gt;</content><author><name></name></author><summary type="html">Background</summary></entry><entry><title type="html">The QSVT with Cirq project</title><link href="http://localhost:4000/blog/2022/01/16/qsvt01-qsp/" rel="alternate" type="text/html" title="The QSVT with Cirq project" /><published>2022-01-16T00:00:00-05:00</published><updated>2022-01-16T00:00:00-05:00</updated><id>http://localhost:4000/blog/2022/01/16/qsvt01-qsp</id><content type="html" xml:base="http://localhost:4000/blog/2022/01/16/qsvt01-qsp/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
 
 &lt;p&gt;The field of quantum computing is a rapidly growing field of research trying to make computers based on the mathematical framework that was dubbed “quantum mechanics” in the early 20th century. These computers are not likely to hit consumer markets as the PC did, at least not in the next couple of decades. Some companies decided to make these early machines available to the public. IBM, IonQ and Rigetti are already offering their machines through cloud solutions to everyone in the world, some of them for free, some of them for a charge. &lt;strong&gt;So, how come we are not seeing an explosion of quantum apps?&lt;/strong&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;want-more-apps-invent-more-algorithms&quot;&gt;Want more apps? Invent more algorithms!&lt;/h2&gt;
+&lt;h2 id=&quot;want-more-apps-invent-more-algorithms&quot;&gt;Want more apps? Invent more algorithms?&lt;/h2&gt;
 
 &lt;p&gt;Well, there are multiple issues. One is that even though these small &amp;lt;100 qubit machines do exist, they are still very limited, one can only run short algorithms on them, before they produce random noise. It is &lt;strong&gt;hard to develop applications for something that doesn’t exist yet&lt;/strong&gt; and it will take a long journey to make quantum computers more reliable.&lt;/p&gt;
 
 &lt;p&gt;The other big issue is that &lt;strong&gt;even if we had a reliable, large enough quantum computer, it might not be that useful just yet&lt;/strong&gt;. This is not just because they are complicated and hard to program, but also because &lt;strong&gt;we have a scarcity of “killer apps”&lt;/strong&gt;. No surprise that there is a huge interest to find scientifically and eventually commercially viable applications.&lt;/p&gt;
 
 &lt;p&gt;There is &lt;strong&gt;a bottleneck&lt;/strong&gt; in trying to find applications: &lt;strong&gt;there are not many quantum algorithms to choose from&lt;/strong&gt;. Valuable quantum applications will rely on quantum algorithms that can beat classical algorithms in one or more aspects.&lt;/p&gt;
+
+&lt;p&gt;TODO: this “not many” argument is not entirely true, and it also might rub quantum algo researchers the wrong way. There are a bunch, they all are based on similar concepts (QFT, but that might be okay as every QCA can be kind of approximated with hadamards and toffolis…https://dabacon.org/pontiff/2006/07/31/all-you-compute-and-all-you-qft-is-all-your-life-will-ever-be/)…but also because most problems that we are interested in are in either NP or P - so classical computers are good enough for it.&lt;/p&gt;
+
+&lt;p&gt;TODO: review montanaro’s 2015 review&lt;/p&gt;
 
 &lt;h2 id=&quot;why-are-there-not-that-many-quantum-algorithms&quot;&gt;Why are there not that many quantum algorithms?&lt;/h2&gt;
 

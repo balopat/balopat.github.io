@@ -1,11 +1,11 @@
 <html>
 <head>
-    <title>Why are there so few quantum algorithms?</title>
+    <title>The QSVT with Cirq project</title>
     <meta charset='UTF-8'>
     <meta content='width=device-width, initial-scale=1' name='viewport'/>
 
     <meta name='description' content='Balint Pato is a PhD candidate at Duke University.'>
-    <meta name='keywords' content='quantum computing, qsvt, quantum  singular value transformation'>
+    <meta name='keywords' content='quantum computing, qsvt, quantum  singular value transformation, cirq'>
     <meta name='author' content='Balint Pato'>
 
     <link href='/css/blog.css' rel='stylesheet'/>
@@ -44,8 +44,8 @@ MathJax.Hub.Config({
 </div>
     <div class='front-matter'>
         <div class='wrap'>
-            <h1>Why are there so few quantum algorithms?</h1>
-            <h4>The start of a series of posts to explore a potential new avenue to discover quantum algorithms</h4>
+            <h1>The QSVT with Cirq project</h1>
+            <h4>The start of a series of posts to explore quantum singular value transformation with Code new avenue to discover quantum algorithms</h4>
             <div class='bylines'>
                 <div class='byline'>
                     <h3>Published</h3>
@@ -60,13 +60,17 @@ MathJax.Hub.Config({
 
 <p>The field of quantum computing is a rapidly growing field of research trying to make computers based on the mathematical framework that was dubbed “quantum mechanics” in the early 20th century. These computers are not likely to hit consumer markets as the PC did, at least not in the next couple of decades. Some companies decided to make these early machines available to the public. IBM, IonQ and Rigetti are already offering their machines through cloud solutions to everyone in the world, some of them for free, some of them for a charge. <strong>So, how come we are not seeing an explosion of quantum apps?</strong></p>
 
-<h2 id="want-more-apps-invent-more-algorithms">Want more apps? Invent more algorithms!</h2>
+<h2 id="want-more-apps-invent-more-algorithms">Want more apps? Invent more algorithms?</h2>
 
 <p>Well, there are multiple issues. One is that even though these small &lt;100 qubit machines do exist, they are still very limited, one can only run short algorithms on them, before they produce random noise. It is <strong>hard to develop applications for something that doesn’t exist yet</strong> and it will take a long journey to make quantum computers more reliable.</p>
 
 <p>The other big issue is that <strong>even if we had a reliable, large enough quantum computer, it might not be that useful just yet</strong>. This is not just because they are complicated and hard to program, but also because <strong>we have a scarcity of “killer apps”</strong>. No surprise that there is a huge interest to find scientifically and eventually commercially viable applications.</p>
 
 <p>There is <strong>a bottleneck</strong> in trying to find applications: <strong>there are not many quantum algorithms to choose from</strong>. Valuable quantum applications will rely on quantum algorithms that can beat classical algorithms in one or more aspects.</p>
+
+<p>TODO: this “not many” argument is not entirely true, and it also might rub quantum algo researchers the wrong way. There are a bunch, they all are based on similar concepts (QFT, but that might be okay as every QCA can be kind of approximated with hadamards and toffolis…https://dabacon.org/pontiff/2006/07/31/all-you-compute-and-all-you-qft-is-all-your-life-will-ever-be/)…but also because most problems that we are interested in are in either NP or P - so classical computers are good enough for it.</p>
+
+<p>TODO: review montanaro’s 2015 review</p>
 
 <h2 id="why-are-there-not-that-many-quantum-algorithms">Why are there not that many quantum algorithms?</h2>
 
