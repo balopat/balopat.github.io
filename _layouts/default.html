@@ -1,47 +1,57 @@
 <html>
+
 <head>
     <title>{{ page.title }}</title>
     <meta charset='UTF-8'>
-    <meta content='width=device-width, initial-scale=1' name='viewport'/>
+    <meta content='width=device-width, initial-scale=1' name='viewport' />
 
     <meta name='description' content='Balint Pato is a PhD candidate at Duke University.'>
     <meta name='keywords' content='{{ page.keywords }}'>
     <meta name='author' content='Balint Pato'>
 
-    <link href='/css/blog.css' rel='stylesheet'/>
-    <link href='/css/trac.css' rel='stylesheet'/>
-    <link href='/css/markdown.css' rel='stylesheet'/>
-    <link rel="stylesheet"
-    href="//unpkg.com/@highlightjs/cdn-assets@11.2.0/styles/default.min.css">
+    <link href='/css/blog.css' rel='stylesheet' />
+    <link href='/css/trac.css' rel='stylesheet' />
+    <link href='/css/markdown.css' rel='stylesheet' />
+    <link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.2.0/styles/default.min.css">
     <script src="/assets/highlight.min.js"></script>
     {% include mathjax.html %}
 </head>
+
 <body>
-<div class='content'>
-    {% include nav.html %}
-    <div class='front-matter'>
-        <div class='wrap'>
-            <h1>{{ page.title }}</h1>
-            <h4>{{ page.subtitle }}</h4>
-            <div class='bylines'>
-                <div class='byline'>
-                    <h3>Published</h3>
-                    <p>{{ page.date |  date: '%d %B %Y' }}</p>
+    <div style="display: none" markdown="block">
+        $$
+            {% include my-preamble.sty %} 
+        $$
+    </div>
+    <div class='content'>
+        {% include nav.html %}
+        <div class='front-matter'>
+            <div class='wrap'>
+                <h1>{{ page.title }}</h1>
+                <h4>{{ page.subtitle }}</h4>
+                <div class='bylines'>
+                    <div class='byline'>
+                        <h3>Published</h3>
+                        <p>{{ page.date | date: '%d %B %Y' }}</p>
+                    </div>
                 </div>
+                <div class='clear'></div>
             </div>
-            <div class='clear'></div>
+        </div>
+
+        <div class='wrap article'>
+            {{ content }}
+        </div>
+        <div id='bibliography'>
+            <div class='wrap'>
+                {% bibliography --cited %}
+            </div>
         </div>
     </div>
-    <div class='wrap article'>
-        {{ content }}
-    </div>
-    <div id='bibliography'>
-        <div class='wrap'>
-            {% bibliography --cited %}
-        </div>
-    </div>
-</div>
-<script>hljs.highlightAll();</script>
-{% include analytics.html %}
+    <script>
+        hljs.highlightAll();
+    </script>
+    {% include analytics.html %}
 </body>
+
 </html>
