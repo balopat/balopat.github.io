@@ -18,9 +18,9 @@
 </head>
 
 <body>
-    <div style="display: none" markdown="block">
+    <div style="display: none" markdown="block">        
         $$
-            {% include my-preamble.sty %} 
+        {% include my-preamble.sty %} 
         $$
     </div>
     <div class='content'>
@@ -40,7 +40,9 @@
         </div>
 
         <div class='wrap article'>
+            {% katexmm %}
             {{ content }}
+            {% endkatexmm %}
         </div>
         <div id='bibliography'>
             <div class='wrap'>

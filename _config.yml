@@ -7,6 +7,8 @@ plugins:
   - jekyll-sitemap
   - jekyll-feed
   - jekyll-katex
+kramdown:
+  math_engine: null
 katex:
   js_path: "assets"  # Path used to search for katex.min.js
   rendering_options:
