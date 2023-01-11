@@ -34,7 +34,7 @@ The structure of this paper is as follows: in Section \ref{sec:basics} we will c
 
 # Basics of entanglement and stabilizer theories
 
-In this section, we review the concepts and mathematical tools in our two theories of interest and establish notation, mostly following Wilde {% cite wilde_quantum_2017 %} for the quantum information theoretical and entanglement-related concepts. To introduce the stabilizer formalism, we will follow multiple sources  {% cite gottesman_stabilizer_1997, aaronson_improved_2004, heimendahl_axiomatic_2022 %}. 
+In this section, we review the concepts and mathematical tools in our two theories of interest and establish notation, mostly following Wilde {% cite wilde_quantum_2017 %} for the quantum information theoretical and entanglement-related concepts. To introduce the stabilizer formalism, we will follow multiple sources  {% cite gottesman_stabilizer_1997 %}, {% cite aaronson_improved_2004}, {% cite heimendahl_axiomatic_2022 %}. 
 
 ## State vector and density matrix representation of quantum states 
 
@@ -42,7 +42,7 @@ Quantum mechanics is inherently probabilistic in the sense that measurement outc
 
 Pure quantum states are represented as normalized vectors (or we can think of them as rays) in a potentially composite Hilbert space, i.e. one that allows for a structure of $\mathcal{H}=\otimes\_{i=1}^n \mathcal{H}\_i$ with each sub-Hilbert space having dimension $d\_i$. We will only discuss cases where $d\_i = d\_j = d, \forall i, j$, i.e. $\mathcal{H}\_i=\mathbb{C}^d$, and where $d$ is prime. When $d=2$, we talk about a Hilbert space of $n$ <em>qubit</em>s. If $d=3$, we call each subsystem a <em>qutrit</em> and $d\gt3$ is the case of <em>qudit</em>s. We denote pure states in the Dirac notation as $\ket{\psi} \in \mathcal{H}$. The members of the computational basis for the $n$ qudit Hilbert space of $d$-dimensional qudits will be labeled by the elements of the vector space $\mathbb{F}\_d^n$ over the finite field $\mathbb{F}\_d$ (i.e. a $n$ length vector with elements 0 to $d-1$, with addition is modulo $d$).  For example $\ket{124} = \ket{1}\otimes \ket{2} \otimes  \ket{4} \in (\mathbb{C}^5)^{\otimes 3}$ is a 3-qudit state of dimension 5. 
 
-As for mixed states, we don't know exactly which pure state a system is in, we can represent this lack of knowledge as a probability distribution $P\_X$ over possible pure states $\ket{\psi\_x}$. This ensemble of states and their probabilities $\{(P\_X(x), \ket{\psi\_x})\}$ affords a <em>density operator</em> representation $\rho \equiv \sum\_x p\_X(x) \ket{\psi\_x}\bra{\psi\_x}$, where $\ket{\psi\_x}\bra{\psi\_x} \in \mathcal{L}(\mathcal{H})$ is the density operator for the pure state $\ket{\psi\_x}$ defined by the outer product of $\ket{\psi\_x}$ and $\bra{\psi\_x} \equiv \ket{\psi\_x}^\dagger$. We denote the set of square linear operators acting on $\mathcal{H}$ with $\mathcal{L}(\mathcal{H})$. A density operator is always positive semi-definite, denoted as $\rho \geq 0$,  and has unit trace, $\text{Tr}\{\rho\}=1$. The set of density operators is denoted as $DO(\mathcal{H}) \subset \mathcal{L}(\mathcal{H})$. 
+As for mixed states, we don't know exactly which pure state a system is in, we can represent this lack of knowledge as a probability distribution $P\_X$ over possible pure states $\ket{\psi\_x}$. This ensemble of states and their probabilities $\\{(P\_X(x), \ket{\psi\_x})\\}$ affords a <em>density operator</em> representation $\rho \equiv \sum\_x p\_X(x) \ket{\psi\_x}\bra{\psi\_x}$, where $\ket{\psi\_x}\bra{\psi\_x} \in \mathcal{L}(\mathcal{H})$ is the density operator for the pure state $\ket{\psi\_x}$ defined by the outer product of $\ket{\psi\_x}$ and $\bra{\psi\_x} \equiv \ket{\psi\_x}^\dagger$. We denote the set of square linear operators acting on $\mathcal{H}$ with $\mathcal{L}(\mathcal{H})$. A density operator is always positive semi-definite, denoted as $\rho \geq 0$,  and has unit trace, $\text{Tr}\\{\rho\\}=1$. The set of density operators is denoted as $DO(\mathcal{H}) \subset \mathcal{L}(\mathcal{H})$. 
 
 ## Describing change with operators and quantum channels 
 
@@ -63,7 +63,7 @@ $$
 
 , where $\omega = e^{i2\pi/d}$ is the $d$th root of unity and $k \cdot z = \sum\_{i=1}^{n} k\_i z\_i$ is the inner product between $k$ and $z$.  
 
-However, in a realistic scenario, evolution is not perfectly known, and as such, it can be thought of as a probabilistic mixture of certain operators. Formally, we represent the most general type of evolution an experimenter can impart on a system with the <em>quantum channel</em> formalism. A quantum channel is a map $\mathcal{N}\_{A \rightarrow B}: \mathcal{L}(\mathcal{H}\_A) \rightarrow \mathcal{L}(\mathcal{H}\_B)$, that must map density operators to density operators, i.e. we have to make sure that the output operator $\rho\_B := \mathcal{N}\_{A \rightarrow B}(\rho\_A)$ has trace 1 and is positive. This leads to two mandatory properties. The first property a quantum channel has to satisfy is to be trace-preserving (TP), i.e. $\text{Tr}\{\rho\_A\}=\text{Tr}\{\rho\_B\}$. The second related to positivity is more subtle, namely that $\rho\_B \geq 0$ is not enough, because positivity is not closed under the tensor product. Our map has to be <em>completely positive</em> (CP), meaning that for a $\rho\_A$ density operator on a system $A$, even if it is extended with an arbitrary reference system $R$ to a density operator $\rho\_{AB}$, $(\mathcal{N}\_{A \rightarrow B} \otimes id\_R) (\rho\_{AB}) \geq 0$, i.e. the total system stays positive semi-definite. Both of these properties can be tested via the Choi-Jamiokołwski representation of a channel $\mathcal{E}$:
+However, in a realistic scenario, evolution is not perfectly known, and as such, it can be thought of as a probabilistic mixture of certain operators. Formally, we represent the most general type of evolution an experimenter can impart on a system with the <em>quantum channel</em> formalism. A quantum channel is a map $\mathcal{N}\_{A \rightarrow B}: \mathcal{L}(\mathcal{H}\_A) \rightarrow \mathcal{L}(\mathcal{H}\_B)$, that must map density operators to density operators, i.e. we have to make sure that the output operator $\rho\_B := \mathcal{N}\_{A \rightarrow B}(\rho\_A)$ has trace 1 and is positive. This leads to two mandatory properties. The first property a quantum channel has to satisfy is to be trace-preserving (TP), i.e. $\text{Tr}\\{\rho\_A\\}=\text{Tr}\\{\rho\_B\\}$. The second related to positivity is more subtle, namely that $\rho\_B \geq 0$ is not enough, because positivity is not closed under the tensor product. Our map has to be <em>completely positive</em> (CP), meaning that for a $\rho\_A$ density operator on a system $A$, even if it is extended with an arbitrary reference system $R$ to a density operator $\rho\_{AB}$, $(\mathcal{N}\_{A \rightarrow B} \otimes id\_R) (\rho\_{AB}) \geq 0$, i.e. the total system stays positive semi-definite. Both of these properties can be tested via the Choi-Jamiokołwski representation of a channel $\mathcal{E}$:
 
 {% katexmm %}
 $$
@@ -74,7 +74,7 @@ $$
 , where $\ket{\phi^+}:=d^{-n} \sum\_{x \in \mathbb{F}\_d^n} \ket{xx}$ is the maximally entangled bipartite state on $2n$ $d$-qudits in the computational basis, and $id\_n$ is the identity channel acting on the Hilbert space of $n$ $d$-qudits. 
 Namely, $\mathcal{E}$ is TP if and only if $Tr(J(\mathcal{E})) = 1$, and $\mathcal{E}$ is CP if and only if $J(\mathcal{E}) \geq 0$. 
 
-We will use the Kraus representation of a quantum channel $\mathcal{E}$, where, for a set of operators called Kraus operators $\{M\_i\}$, such that they are <em>complete</em>, i.e. $\sum\_i M\_i^\dagger M\_i = I$, the channel's effect is expressed as
+We will use the Kraus representation of a quantum channel $\mathcal{E}$, where, for a set of operators called Kraus operators $\\{M\_i\\}$, such that they are <em>complete</em>, i.e. $\sum\_i M\_i^\dagger M\_i = I$, the channel's effect is expressed as
 
 {% katexmm %}
 $$
@@ -82,13 +82,13 @@ $$
 $$
 {% endkatexmm %}
 
-Measurement of an <em>observable</em> can be described as a quantum channel. An observable $M$ is a Hermitian operator, $M^\dagger=M$, and thus has a spectral decomposition, say $M=\sum\_i \lambda\_i \ket{\phi\_i}\bra{\phi\_i}$, where $\lambda\_i \in \mathbb{R}$ are the eigenvalues and $\ket{\phi\_i}$ are the corresponding eigenstates. When representing a measurement with this observable, the measurement outcomes are the eigenvalues, and after a certain eigenvalue $\lambda\_i$ is observed, the system's state will be projected to the corresponding eigensubspace (of dimension equal to the multiplicity of the eigenvalue), e.g. if $\lambda\_i$ has multiplicity 1: $\rho \rightarrow \frac{\ket{\phi\_i}\bra{\phi\_i}\rho\ket{\phi\_i}\bra{\phi\_i}}{p\_M(i)}$, where $p\_M(i)=\text{Tr}\{\ket{\phi\_i}\bra{\phi\_i}\rho\ket{\phi\_i}\bra{\phi\_i}\}$ is the probability of observing $\lambda\_i$. 
+Measurement of an <em>observable</em> can be described as a quantum channel. An observable $M$ is a Hermitian operator, $M^\dagger=M$, and thus has a spectral decomposition, say $M=\sum\_i \lambda\_i \ket{\phi\_i}\bra{\phi\_i}$, where $\lambda\_i \in \mathbb{R}$ are the eigenvalues and $\ket{\phi\_i}$ are the corresponding eigenstates. When representing a measurement with this observable, the measurement outcomes are the eigenvalues, and after a certain eigenvalue $\lambda\_i$ is observed, the system's state will be projected to the corresponding eigensubspace (of dimension equal to the multiplicity of the eigenvalue), e.g. if $\lambda\_i$ has multiplicity 1: $\rho \rightarrow \frac{\ket{\phi\_i}\bra{\phi\_i}\rho\ket{\phi\_i}\bra{\phi\_i}}{p\_M(i)}$, where $p\_M(i)=\text{Tr}\\{\ket{\phi\_i}\bra{\phi\_i}\rho\ket{\phi\_i}\bra{\phi\_i}\\}$ is the probability of observing $\lambda\_i$. 
 
 Finally, we can always find a <em>Stinespring dilation</em> of a channel $\mathcal{E}\_A$ acting on system $A$, which is a unitary $U\_{AR}$ on a larger bipartite system $AR$ such that on the subsystem $A$ its effect (i.e. after tracing out system $R$) is exactly the channel $\mathcal{E}\_A$: 
 
 {% katexmm %}
 $$
-\mathcal{E}_A(\rho_A) = Tr_B\{ U_{AR}(\rho_A \otimes \ket{0}\bra{0}_R) U_{AR}^\dagger \}
+\mathcal{E}_A(\rho_A) = Tr_B\\{ U_{AR}(\rho_A \otimes \ket{0}\bra{0}_R) U_{AR}^\dagger \\}
 $$
 {% endkatexmm %}
 
@@ -114,7 +114,7 @@ $$
 
 A state $\ket{\psi} \in \mathcal{H}$ is <em>stabilized</em> by an $n$ qudit Hermitian Pauli operator $P \in \mathcal{P}\_n(d)$ (Hermiticity is a requirement for it to be an observable) if the state is an eigenstate of it with +1 eigenvalue, i.e $P\ket{\psi} = \ket{\psi}$. For example $\ket{0}$ is stabilized by $Z$ and $\ket{+}$ is stabilized by $X$. 
 
-For two qubits, the situation changes, one might think that for a $\ket{00}$ state, $S\_1:=Z\_1Z\_2$ would be sufficient, however, the +1 eigenspace of $Z\_1Z\_2$ is two dimensional, both $\ket{00}$ and $\ket{11}$ have +1 eigenvalues. We need then another operator to "filter out" the extra dimension but has $\ket{00}$ as its +1 eigenstate. We find that $S\_2:=Z\_1I\_2$ is a good example. We can also notice that $S\_1S\_2 = I\_1Z\_2$, which is also a stabilizer for $\ket{00}$, and naturally $I\_1I\_2$ is also a stabilizer. The set $\{S\_1, S\_2, S\_1S\_2, I\}$ is a <em>group</em>, that is closed under operator multiplication. Also, all of its members commute with each other (i.e. it's <em>Abelian</em>), thus they can be diagonalized simultaneously. Their shared +1 eigenspace is the <em>stabilized subspace</em>. 
+For two qubits, the situation changes, one might think that for a $\ket{00}$ state, $S\_1:=Z\_1Z\_2$ would be sufficient, however, the +1 eigenspace of $Z\_1Z\_2$ is two dimensional, both $\ket{00}$ and $\ket{11}$ have +1 eigenvalues. We need then another operator to "filter out" the extra dimension but has $\ket{00}$ as its +1 eigenstate. We find that $S\_2:=Z\_1I\_2$ is a good example. We can also notice that $S\_1S\_2 = I\_1Z\_2$, which is also a stabilizer for $\ket{00}$, and naturally $I\_1I\_2$ is also a stabilizer. The set $\\{S\_1, S\_2, S\_1S\_2, I\\}$ is a <em>group</em>, that is closed under operator multiplication. Also, all of its members commute with each other (i.e. it's <em>Abelian</em>), thus they can be diagonalized simultaneously. Their shared +1 eigenspace is the <em>stabilized subspace</em>. 
 
 In general, we can represent an Abelian group of size $2^k$ with only $k$ independent elements, the <em>generators</em>. An Abelian subgroup of the $n$-qudit Pauli group is called a <em>stabilizer group</em> if it does not contain the element $- \mathbb{I}$ (to ensure that all stabilizers are Hermitian). As each generator "halves" the Hilbert space, we can see that a $k$ dimensional stabilizer group stabilizes an $n-k$ dimensional subspace. When $n=k$, we have a <em>stabilizer state</em>. Single qubit stabilizer states are:
 
@@ -186,7 +186,7 @@ $$
 </em>
 
 
-Chitambar et al. defined a monotone that measures the success rate of a particular task: random-EPR pair distillation from  W-class states. W-class states are any state that is obtainable from the $\ket{W}=\frac{1}{\sqrt{3}}(\ket{100}+\ket{010}+\ket{001})$ state with LOCC operations and can be parameterized as $\sqrt{x\_0}\lvert 000\rangle + \sqrt{x\_A}\lvert 100\rangle + \sqrt{x\_B}\lvert 010\rangle + \sqrt{x\_C}\lvert 001\rangle$. Due to normalization $x\_0$ is fully determined by $1=x\_0+x\_A+x\_B+x\_C$, thus we will label W-class states as $\vec{x}=\{x\_A,x\_B,x\_C\}$. In random-EPR pair distillation, one uses a protocol to transform an initial W-class state to random singlet states $\ket{\psi}\_ij=\frac{1}{\sqrt{2}}(\lvert 01\rangle\_{ij} + \lvert 10\rangle\_{ij})$ between any two of the 3 parties as shown in the figure below.
+Chitambar et al. defined a monotone that measures the success rate of a particular task: random-EPR pair distillation from  W-class states. W-class states are any state that is obtainable from the $\ket{W}=\frac{1}{\sqrt{3}}(\ket{100}+\ket{010}+\ket{001})$ state with LOCC operations and can be parameterized as $\sqrt{x\_0}\lvert 000\rangle + \sqrt{x\_A}\lvert 100\rangle + \sqrt{x\_B}\lvert 010\rangle + \sqrt{x\_C}\lvert 001\rangle$. Due to normalization $x\_0$ is fully determined by $1=x\_0+x\_A+x\_B+x\_C$, thus we will label W-class states as $\vec{x}=\\{x\_A,x\_B,x\_C\\}$. In random-EPR pair distillation, one uses a protocol to transform an initial W-class state to random singlet states $\ket{\psi}\_ij=\frac{1}{\sqrt{2}}(\lvert 01\rangle\_{ij} + \lvert 10\rangle\_{ij})$ between any two of the 3 parties as shown in the figure below.
 
 
 
@@ -195,7 +195,7 @@ Chitambar et al. defined a monotone that measures the success rate of a particul
 
 
 
-For  $\vec{x}=\{x\_A,x\_B,x\_C\}$, let $\{n\_1,n\_2,n\_3\}$ be a labeling of $\{A,B,C\}$ so that $x\_{n\_1} \geq x\_{n\_2} \geq x\_{n\_3}$. Then, the function 
+For  $\vec{x}=\\{x\_A,x\_B,x\_C\\}$, let $\\{n\_1,n\_2,n\_3\\}$ be a labeling of $\\{A,B,C\\}$ so that $x\_{n\_1} \geq x\_{n\_2} \geq x\_{n\_3}$. Then, the function 
 {% katexmm %}
 $$
 \kappa(\vec{x}) := 2(x_{n_2} + x_{n_3}) - \frac{x_{n_2}x_{n_3}}{x_{n_1}} 
@@ -266,7 +266,7 @@ With the definitions out of the way, let's look at the main result by Heimendahl
 
 {% katexmm %}
 $$
-\Lambda(\rho) = \rho_{00} \ket{++}\bra{++} + \sum_{x \in \{01, 10, 11\}} \rho_{x,x} \ket{x}\bra{x} + \frac{1}{2} \sum_{\substack{x,y \in \{01, 10, 11\} \\ x\neq y}} \rho_{x,y}\ket{x}\bra{y}
+\Lambda(\rho) = \rho_{00} \ket{++}\bra{++} + \sum_{x \in \\{01, 10, 11\\}} \rho_{x,x} \ket{x}\bra{x} + \frac{1}{2} \sum_{\substack{x,y \in \\{01, 10, 11\\} \\ x\neq y}} \rho_{x,y}\ket{x}\bra{y}
 $$
 {% endkatexmm %}
 
@@ -304,7 +304,7 @@ It is possible to show that all three steps are necessary for the channel to be 
 We will introduce the notion of a Clifford dilation for the sketch of the proof. 
 A superoperator $\mathcal{E}$ mapping $n$ and $m$ qudit spaces of $d$ dimension has a Clifford dilation if there exists a number $k$, a stabilizer state $\ket{s} \in SP\_k(d)$ and a Clifford unitary $U$ on $n+k$ qudits such that: 
 $$
-\mathcal{E}(\rho) = Tr_{m+1,...n+k}\{U(\rho \otimes \ket{s}\bra{s})U^\dagger\}
+\mathcal{E}(\rho) = Tr_{m+1,...n+k}\\{U(\rho \otimes \ket{s}\bra{s})U^\dagger\\}
 $$
 
 The channels that have a Clifford dilation are the ones that have no measurements or classical randomness.

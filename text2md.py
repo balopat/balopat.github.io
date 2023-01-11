@@ -147,6 +147,12 @@ if __name__ == "__main__":
                 content,
             )
 
+            content = re.sub(
+                r"([^\\])\\([\}|\{])",
+                r"\1\\\\\2",
+                content,
+            )
+
             for i in range(10):
                 content = re.sub(
                     r"\$(.*?)([^\\])\_(.*?)\$",

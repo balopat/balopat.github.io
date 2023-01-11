@@ -1,3 +1,4 @@
+*_gen.md
 .vscode
-_site
+./_site
 .jekyll-cache
