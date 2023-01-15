@@ -15,10 +15,10 @@ After three semesters into grad school, I'm realizing that my initial lofty goal
 
 This particular write-up was for my 2022 Fall semester Quantum Information Theory class taught by Professor Iman Marvian. 
 
-# Abstract
+##  Abstract
 Resource theories formalize the notion of valuable resources. A quantum resource theory identifies "free states" that can be created with "free operations" - these are "easy" relative to assumed capabilities. To create "resource states", one must either have states that contain "some" of the resource or use resource-generating operations. The theory of entanglement (where the resource is entanglement) and the theory of magic (where the resource is "non-stabilizerness", or "magic") share a similar structure through the lens of resource theory. Our main focus is a particular hierarchical structure of free operations, namely, the gap between the operational definition and the axiomatic definition of these classes of operations. For entanglement, this is the gap between the classes of Local Operations and Classical Communication (LOCC) and Separable Operators. In the case of magic, the gap is between the classes of Stabilizer Operators and Completely Stabilizer Preserving operators. These gaps have potential implications for protocols related to entanglement and magic state distillation.
 
-# Introduction
+##  Introduction
 
 The majority of physical theories establish laws based on experimental observations of nature and predict behavior for situations that were not yet verified experimentally. Resource theories in contrast have an inherent process-, or engineering focus as they examine what is possible given a demarcation line in operational capabilities. With roots in Carnot's explorations of how to exploit thermodynamic non-equilibrium as a resource for heat engines, resource theories provide a framework to organize the concepts and questions of availability and quantification of resources, conversion rates, reversibility, and more. At the core of a quantum resource theory, a set of operations is defined to be the <em>free operations</em>, or <em>resource-non-generating</em> (RNG) operations, and a set of states defined to be the <em>free states</em>. The intuition is that RNG operations and free states are the "easy ones", i.e. assumed to be available to acquire without incurring high costs. This is in contrast to valuable <em>dynamic resources</em> (resource generating operations), i.e. operations generating <em>static resources</em> (resource states) which are "hard" to acquire. {% cite chitambar_quantum_2019 %}. 
 
@@ -32,11 +32,11 @@ In entanglement theory, the class of separable channels (SEP) are the axiomatica
 
 The structure of this paper is as follows: in Section \ref{sec:basics} we will cover the minimum prerequisite of notations and concepts to understand the separation of these two classes in these two theories. In Section \ref{sec:free ops} we will then get into the details of the separation of these classes in the two theories and finally, in Section \ref{sec:discussion}, we discuss the potential consequences and draw our conclusions. 
 
-# Basics of entanglement and stabilizer theories
+##  Basics of entanglement and stabilizer theories
 
 In this section, we review the concepts and mathematical tools in our two theories of interest and establish notation, mostly following Wilde {% cite wilde_quantum_2017 %} for the quantum information theoretical and entanglement-related concepts. To introduce the stabilizer formalism, we will follow multiple sources  {% cite gottesman_stabilizer_1997 %}, {% cite aaronson_improved_2004}, {% cite heimendahl_axiomatic_2022 %}. 
 
-## State vector and density matrix representation of quantum states 
+### State vector and density matrix representation of quantum states 
 
 Quantum mechanics is inherently probabilistic in the sense that measurement outcomes on a system are defined by the amplitude square of a set of complex numbers (<em>probability amplitudes</em>) that describe a state as defined by the Born rule. If we can describe the probability amplitudes of a quantum mechanical system with certainty, we call that state a <em>pure</em> state. However, this is far from realistic, usually, we don't know perfectly the description of a system. Thus, on top of the inherent "quantum probability distribution", we might have an uncertainty of these amplitudes themselves, layering a "classical probability distribution" over the quantum probability, which we then call <em>mixed</em> states (or noisy states). 
 
@@ -44,7 +44,7 @@ Pure quantum states are represented as normalized vectors (or we can think of th
 
 As for mixed states, we don't know exactly which pure state a system is in, we can represent this lack of knowledge as a probability distribution $P\_X$ over possible pure states $\ket{\psi\_x}$. This ensemble of states and their probabilities $\\{(P\_X(x), \ket{\psi\_x})\\}$ affords a <em>density operator</em> representation $\rho \equiv \sum\_x p\_X(x) \ket{\psi\_x}\bra{\psi\_x}$, where $\ket{\psi\_x}\bra{\psi\_x} \in \mathcal{L}(\mathcal{H})$ is the density operator for the pure state $\ket{\psi\_x}$ defined by the outer product of $\ket{\psi\_x}$ and $\bra{\psi\_x} \equiv \ket{\psi\_x}^\dagger$. We denote the set of square linear operators acting on $\mathcal{H}$ with $\mathcal{L}(\mathcal{H})$. A density operator is always positive semi-definite, denoted as $\rho \geq 0$,  and has unit trace, $\text{Tr}\\{\rho\\}=1$. The set of density operators is denoted as $DO(\mathcal{H}) \subset \mathcal{L}(\mathcal{H})$. 
 
-## Describing change with operators and quantum channels 
+### Describing change with operators and quantum channels 
 
 When the change in a system is noiseless, i.e. the system is closed, it is postulated to be a transformation $U \in \mathcal{L}(\mathcal{H})$ on the system that is <em>unitary</em>, i.e. $UU^\dagger=I$. In the vector representation, the effect of $U$ is $\ket{\psi} \rightarrow U\ket{\psi}$, in the density operator formalism, it is $\rho \rightarrow U \rho U^\dagger$. We will make use of the generalizations of the Pauli group, which is generated by the Pauli-X and Pauli-Z operators for a single qubit, with their action on the computational basis:  
 {% katexmm %}
@@ -94,13 +94,13 @@ $$
 
 , where $\ket{0}\bra{0}\_R$ is an arbitrary pure state picked from the reference subsystem $R$. 
 
-## Entanglement 
+### Entanglement 
 
 A pure quantum state $\ket{\psi}\_{AB}$ on a bipartite system $\mathcal{H}\_A \otimes \mathcal{H}\_B$ is called a <em>tensor product state</em> (TPS) or <em>product state</em> if it can be expressed as a tensor product of two local states: $\ket{\psi} = \ket{\psi}\_A \otimes \ket{\psi}\_B$. When there are no states local to the subsystems that can completely describe the state of a pure state, it is <em>entangled</em>. A prototypical example is the Bell state, $\frac{\ket{00} + \ket{11}}{\sqrt{2}}$, the qubit case of $\ket{\phi^+}$.
 
 In the case of mixed states, a density operator $\rho$ is called <em>separable</em> if it is a convex combination of pure product states, i.e. $\rho = \sum\_x p\_X(x) \ket{\psi\_x}\bra{\psi\_x}\_{A} \otimes  \ket{\psi\_x}\bra{\psi\_x}\_{B}$. We say that a mixed state is <em>entangled</em> when it is not separable. The set of separable states is convex, i.e. $\forall \rho, \sigma$ separable, for all $\lambda \in [0,1] : \lambda \rho + (1-\lambda) \sigma$ is also separable.
 
-## Stabilizer formalism and magic 
+### Stabilizer formalism and magic 
 
 The stabilizer formalism is an efficient way to represent certain subspaces and states in a Hilbert space. For the class of states called <em>stabilizer states</em>, which we will define precisely in a moment, simulation and computation with <em>stabilizer operations</em> (SO) become classically simulatable. This result is the Gottesman-Knill theorem {% cite gottesman_stabilizer_1997 %}, and one of its implications is that it identifies a large subset of quantum computing states and operations that are not classical but can be simulated efficiently classically. If one could simulate everything that a quantum computer can do, the field of quantum computing would be in trouble justifying their efforts. Fortunately, this is not the case, as in order to achieve <em>universality</em>, one has to use extra resources: either use operations outside of the stabilizer operations or use a generous amount of special states called <em>magic states</em>. While we will not need magic states in the later exposition, 
  we remark that Bravyi and Kitaev {% cite bravyi_universal_2005 %} defined magic states as states that are any Clifford transformations of one of these two types of pure magic states: 
@@ -140,11 +140,11 @@ An $n$-qubit Pauli operator can be represented by $2n+1$ bits, with 2 bits for e
 
 Beyond the efficient representation of states, it is possible to efficiently update the state if we limit the set of operations to those that map stabilizer states to stabilizer states. As an $n$-qubit stabilizer state can be represented by $n$ $n$-qubit Pauli operators, we need these operators to map Pauli operators to Pauli operators. The largest set of unitary operators that satisfy this criterion is the Clifford group, $Cl\_n(2)$, generated by the $H$, $CNOT$, and the $S=\sqrt{Z}$ gates. Gottesman and Knill showed that a polynomial number of operations is sufficient to simulate Clifford operations or Pauli measurements.
 
-# The structure of free operations
+##  The structure of free operations
 
 In this section, we will review how the structure of free operations has a gap between axiomatic and operational definitions. In the case of entanglement, after a quick descriptive example for separation from Bennett et al. {% cite bennett_quantum_1999 %}, we follow Chitambar et al. {% cite chitambar_increasing_2012 %} and for magic, the work by Heimendahl et al.  {% cite heimendahl_axiomatic_2022 %}. 
 
-## Entanglement: $LOCC \subset SEP$
+### Entanglement: $LOCC \subset SEP$
 
 As mentioned before, in entanglement theory, the operational and axiomatic classes of RNG operations are the LOCC and the Separable (SEP) channels. 
 <strong>Definition</strong><em>A channel $\mathcal{E}$ on a Hilbert space of $N$ qudits is a <strong>separable channel</strong> if it has a Kraus decomposition with separable Kraus operators, i.e.: 
@@ -238,7 +238,7 @@ While the SEP probability is 1, the LOCC probability is bound by $\kappa(\vec{x}
 
 
 
-## Stabilizer formalism: $SO\_n(d) \subset CSP$ 
+### Stabilizer formalism: $SO\_n(d) \subset CSP$ 
 
 The operationally defined set of free operations in the stabilizer formalism is the Stabilizer Operators. We will formally define them here. All the above concepts in Section \ref{sec:basics} including the Pauli group $\mathcal{P}\_n(d)$, the stabilizer group $S$, the Clifford group $Cl\_n(d)$, and stabilizer states STAB($d,n$) readily generalize from qubits to qudits as described in  {% cite heimendahl_axiomatic_2022 %}. Our formal definitions then will be stated using qudits: 
 
@@ -324,7 +324,7 @@ $$
 
 For larger qubit and qudit dimensions we refer the reader to {% cite heimendahl_axiomatic_2022 %}. For the full picture though, it is worth mentioning that for larger dimensional qudit states even $CSP\_n(d)$ might not be maximal in terms of free operations. For $d$ odd dimensions, resource theories of magic use the Wigner function representation of a function. This is a quasi-probability distribution in phase-space and its total negativity is a magic monotone called <em>mana</em>. Thus, the set of free states can be enlarged to include those with positive Wigner functions, and channels that preserve the positivity of the Wigner function and do so closed under the tensor product are called the <em>completely</em>-Wigner-positivity-preserving ($CWPP\_n,m(d)$) channels. Thus in case of odd $d\gt2$ dimensions, the full hierarchy is $SO\_{n,m}(d) \subset CSP\_{n,m} \subseteq CWPP\_{n,m}(d)$, where the last containment is conjectured to be proper by Heimendahl et al. 
 
-# Discussion
+##  Discussion
 
 Starting from the basics, we reviewed how the structure of the free operations in the theories of entanglement and magic are structured.  To explore entanglement, we looked at an early example by Bennett et al. that demonstrated measurement that is separable but not LOCC. Following Chitambar et al., we explored an entanglement monotone specifically designed to measure the maximum success of random-EPR distillation from W-class states, and how it can show a 12.5% gap between LOCC and SEP. 
 

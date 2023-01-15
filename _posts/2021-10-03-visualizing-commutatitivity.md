@@ -16,14 +16,14 @@ Disclaimer: the function implementation and Mathematica syntax used is very naiv
 Please visit the [Github Discussion for this post](https://github.com/balopat/balopat.github.io/discussions/1) for comments! 
 
 
-## [background] Groups acting on sets
+## Groups acting on sets
 
 One of the most important things you can do with a group is to have it act on a set. The group action has to be valid operations on the set. For example, if the set is the group itself, the action can be left/right multiplication or conjugation (defined later) as well. When we're talking about an action of an element $g$ of the group $G$ on a set element $a$ in abstract, i.e. without specifying exactly what we mean, we denote it by $g \centerdot a$. 
 
 If we apply a group action defined by all elements of $G$ on an element $a$, we get a set: $ O_a = \\{ g \centerdot a \lvert g \in G \\} $, the [orbit](https://proofwiki.org/wiki/Definition:Orbit_(Group_Theory)) of $a$. The elements in $G$ that keep $a$ the same are called the _stabilizer_ of $a$ in $G$, denoted $G_S(a)=\\{g \in G \lvert g \centerdot a = a\\}$. The stabilizer of any element is a subgroup of $G$. In fact the orbit of $a$ is an equivalence class for $a$, and the group action divides $G$ into disjoint equivalence classes. It is also provable that the order of (the number of elements in) the orbit equals to the [index](https://en.wikipedia.org/wiki/Index_of_a_subgroup) of the stabilizer $\lvert G : G_a\lvert$.
 
 
-## [background] Permutation representation 
+## Permutation representation 
 
 By [Cayley's theorem](https://en.wikipedia.org/wiki/Cayley%27s_theorem), every group of order $n$ is isomorphic to some subgroup of $S_n$, the symmetric group of order $n$. We are going to assume that for the group in question you can generate the permutation representation, specifically the [permutation cycle notation](https://mathworld.wolfram.com/PermutationCycle.html) of the elements. For example, for the quaternion group $Q_8$, we can list the elements of the group itself using the [`Quaternions` package](https://reference.wolfram.com/language/Quaternions/tutorial/Quaternions.html): 
 
@@ -81,7 +81,7 @@ The permutation representation for groups is akin to the matrix representation o
 One thing we get with this representation is stable, deterministic ordering between permutations, which will allow for seeing subgroup structure clearly in larger groups.
 
 
-## [background] Conjugacy classes 
+## Conjugacy classes 
 
 
 Fun things happen when a group $G$ acts on itself!
@@ -111,7 +111,7 @@ In the quaternion group $Q_8$, $i, j, k$ have the same cycle lengths but you can
 
 To summarize - conjugacy classes split up $G$ into disjoint sets, and while cycle lengths are the same within a conjugacy class, the property of being in a conjugacy class is inherently connected to the group you are in. 
 
-## [idea] The commutativity plot: commuting visibly
+## The commutativity plot: commuting visibly
 
 To visualize all the ideas above, I coded up a function called `CommutativityPlot` in [this gist](https://gist.github.com/balopat/3e363e7ca4492fd77703ff80a14830bf). If we order the elements of the group by their conjugacy class and then their natural sorting order (defined by Mathematica), and we plot whether they commute or not, we'll get a graph plot like this for our quaternion group, $Q_8$: 
 
@@ -141,20 +141,20 @@ As an example see below the (pretty boring) commutativity plot for the $C_4$ gro
 <img src="/assets/images/c4-commute.png" width="60%"/>
 </center>
 
-## [apply] Number of conjugacy classes
+## Number of conjugacy classes
 
 Within a conjugacy class (i.e. between two yellow lines), the number of blue squares is going to be the number of elements in the group! Why? 
 
 To see this, let's line up our concepts next to each other in the different "languages" we talk about them: 
 
 
-| Conjugation | Group acting on _itself_ by conjugation | commutativity plot |
-| ------------------- | ---------------------------| ----------------- |
-| element $a \in G$ | the target $a \in G$ of the group action | a row / a column | 
-| centralizer of $a$, $C_G(a)$, things that commute with $a$ | stabilizer of $a$, $S_G(a)$ | the elements corresponding to the blue squares in a row / column | 
-| conjugacy class of $a$ | orbit of $a$, $O_a$ | the rows/cols within the same yellow grid interval as $a$'s row/col| 
-| number of conjugates / size of conjugacy class | size of orbit | the number of rows/cols within the same yellow grid interval as $a$'s row/col| 
-| number of conjugacy classes | number of orbits | number of yellow grid intervals | 
+| Conjugation                                                | Group acting on _itself_ by conjugation  | commutativity plot                                                            |
+| ---------------------------------------------------------- | ---------------------------------------- | ----------------------------------------------------------------------------- |
+| element $a \in G$                                          | the target $a \in G$ of the group action | a row / a column                                                              |
+| centralizer of $a$, $C_G(a)$, things that commute with $a$ | stabilizer of $a$, $S_G(a)$              | the elements corresponding to the blue squares in a row / column              |
+| conjugacy class of $a$                                     | orbit of $a$, $O_a$                      | the rows/cols within the same yellow grid interval as $a$'s row/col           |
+| number of conjugates / size of conjugacy class             | size of orbit                            | the number of rows/cols within the same yellow grid interval as $a$'s row/col |
+| number of conjugacy classes                                | number of orbits                         | number of yellow grid intervals                                               |
 
 
 Now, the centralizer for each element is a subgroup, in fact, the stabilizer for the element when we consider the group acting on itself by conjugation. As we noted, the size of the orbit is exactly the index of the stabilizer, which means exactly that the blue squares will add up to $\lvert G \lvert$ within the yellow lines. In the case of $Q_8$ above, if we add up all the blue squares and divide it by $G$, then we get the number of conjugacy classes, which is 5!
@@ -191,7 +191,7 @@ These 3 matrices generate 16 elements, so our permutation representation will be
 
 We can see that the center of the Pauli group is $\\{\pm I, \pm i I\\}$, each element there has its own conjugacy class, and then, interestingly each element has only one conjugate, which is -1 times the element itself.
 
-## [apply] The probability that two elements commute
+## The probability that two elements commute
 
 The commutativity plot almost intuitively leads to this question: how dense can the blue squares be? In probabilistic terms, the proportion of the blue vs the full area is equivalent to the probability that two random elements commute from $G$. Of course, we are interested in non-abelian groups, as abelian groups have a boring full-blue plot. In the case of $S_6$, the plot becomes very large (6! x 6!), but we can see that it is very sparse (also has some cool structure in there): 
 

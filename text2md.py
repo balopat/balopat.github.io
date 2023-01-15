@@ -33,19 +33,19 @@ if __name__ == "__main__":
             )
             content = re.sub(
                 r"\\abstract\{(.*?)\}",
-                r"""# Abstract
+                r"""## Abstract
 \1""",
                 content,
             )
             content = re.sub(r"\\label\{.*?\}", "", content)
             content = re.sub(
                 r"\\section\{(.*?)\}",
-                r"# \1",
+                r"## \1",
                 content,
             )
             content = re.sub(
                 r"\\subsection\{(.*?)\}",
-                r"## \1",
+                r"### \1",
                 content,
             )
             # can't handle embedded curlys just yet

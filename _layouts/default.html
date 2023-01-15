@@ -9,22 +9,37 @@
     <meta name='keywords' content='{{ page.keywords }}'>
     <meta name='author' content='Balint Pato'>
 
+    <!-- <link href='/css/reset.css' rel='stylesheet' /> -->
+    <link href='/css/progress.css' rel='stylesheet' />
     <link href='/css/blog.css' rel='stylesheet' />
     <link href='/css/trac.css' rel='stylesheet' />
     <link href='/css/markdown.css' rel='stylesheet' />
     <link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.2.0/styles/default.min.css">
     <script src="/assets/highlight.min.js"></script>
+    <script src="/assets/jquery-2.1.4.js"></script>
+    <script src="/assets/modernizr.js"></script>
     {% include mathjax.html %}
 </head>
 
 <body>
-    <div style="display: none" markdown="block">        
-        $$
-        {% include my-preamble.sty %} 
-        $$
+    <div style="display: none" markdown="block">
+        $$ {% include my-preamble.sty %} $$
     </div>
     <div class='content'>
         {% include nav.html %}
+        <aside class="read-more fixed">
+            <ul id="h2s">
+                {% for item in page.subnav %}
+
+                <li>
+                    <a href="{{ item.url }}">
+                        <h3><em>{{ item.title }}</em></h3>
+                        <svg x="0px" y="0px" width="36px" height="36px" viewBox="0 0 36 36"><circle fill="none" stroke-width="2" cx="18" cy="18" r="16" stroke-dasharray="100 100" stroke-dashoffset="100" transform="rotate(-90 18 18)"></circle></svg>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </aside>
         <div class='front-matter'>
             <div class='wrap'>
                 <h1>{{ page.title }}</h1>
@@ -40,9 +55,7 @@
         </div>
 
         <div class='wrap article'>
-            {% katexmm %}
-            {{ content }}
-            {% endkatexmm %}
+            {% katexmm %} {{ content }} {% endkatexmm %}
         </div>
         <div id='bibliography'>
             <div class='wrap'>
@@ -53,6 +66,8 @@
     <script>
         hljs.highlightAll();
     </script>
+    <script src="/assets/progress.js"></script>
+
     {% include analytics.html %}
 </body>
 
