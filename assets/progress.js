@@ -77,10 +77,11 @@ jQuery(document).ready(function($) {
     }
 
     function updateh2() {
-        var scrollTop = $(window).scrollTop();
+        var scrollTop = $(window).scrollTop() + window.innerHeight / 2;
 
         h2s.each(function() {
             var h2 = $(this);
+
 
             var h2Top = h2.offset().top;
 
@@ -88,6 +89,7 @@ jQuery(document).ready(function($) {
 
             if (h2.is(':last-of-type')) {
                 h2Height = windowHeight - h2Top
+                scrollTop += window.innerHeight / 2;
             } else {
                 var h2Height = h2s.eq(h2s.index(h2) + 1).offset().top - h2Top;
             }
@@ -97,7 +99,7 @@ jQuery(document).ready(function($) {
             } else if (scrollTop >= h2Top && h2Top + h2Height > scrollTop) {
                 var dashoffsetValue = svgCircleLength * (1 - (scrollTop - h2Top) / h2Height);
                 h2SidebarLink.addClass('reading').removeClass('read').find('circle').attr({ 'stroke-dashoffset': dashoffsetValue });
-                changeUrl(h2SidebarLink.attr('href'));
+                // changeUrl(h2SidebarLink.attr('href'));
             } else {
                 h2SidebarLink.removeClass('reading').addClass('read');
             }

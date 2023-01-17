@@ -2,10 +2,10 @@
 title: Introduction to the structure of free operations in the resource theories of entanglement and magic
 subtitle: The operational and axiomatic definitions have a gap in both entanglement and magic
 layout: default
-date: 2023-01-01
+date: 2023-01-15
 keywords: quantum computing, magic, entanglement
 published: true
-draft: true
+draft: false
 ---
 
 
@@ -30,11 +30,11 @@ This report focuses on a particular aspect of resource theories of magic and ent
 
 In entanglement theory, the class of separable channels (SEP) are the axiomatically defined free operations and the operational ones are the LOCC operations. Chitambar et al. {% cite chitambar_increasing_2012 %} found an operationally interpretable measure of entanglement, that shows a 12.5% gap between SEP and LOCC. In the case of magic theory, a recent counterexample from Heimendahl et al. {% cite heimendahl_axiomatic_2022 %} shows that the axiomatically defined class of free operations, Completely Stabilizer Preserving (CSP) is strictly larger than the operationally defined class of stabilizer operations (SO). 
 
-The structure of this paper is as follows: in Section \ref{sec:basics} we will cover the minimum prerequisite of notations and concepts to understand the separation of these two classes in these two theories. In Section \ref{sec:free ops} we will then get into the details of the separation of these classes in the two theories and finally, in Section \ref{sec:discussion}, we discuss the potential consequences and draw our conclusions. 
+The structure of this paper is as follows: in [Fundamental concepts](#fundamental-concepts) we will cover the minimum prerequisite of notations and concepts to understand the separation of these two classes in these two theories. In [The structure of free operations](#the-structure-of-free-operations) we will then get into the details of the separation of these classes in the two theories and finally, in [Discussion](#discussion), we discuss the potential consequences and draw our conclusions. 
 
-##  Basics of entanglement and stabilizer theories
+##  Fundamental concepts
 
-In this section, we review the concepts and mathematical tools in our two theories of interest and establish notation, mostly following Wilde {% cite wilde_quantum_2017 %} for the quantum information theoretical and entanglement-related concepts. To introduce the stabilizer formalism, we will follow multiple sources  {% cite gottesman_stabilizer_1997 %}, {% cite aaronson_improved_2004}, {% cite heimendahl_axiomatic_2022 %}. 
+In this section, we review the concepts and mathematical tools in our two theories of interest and establish notation, mostly following Wilde {% cite wilde_quantum_2017 %} for the quantum information theoretical and entanglement-related concepts. To introduce the stabilizer formalism, we will follow multiple sources  {% cite gottesman_stabilizer_1997 %}, {% cite aaronson_improved_2004 %}, {% cite heimendahl_axiomatic_2022 %}. 
 
 ### State vector and density matrix representation of quantum states 
 
@@ -147,6 +147,7 @@ In this section, we will review how the structure of free operations has a gap b
 ### Entanglement: $LOCC \subset SEP$
 
 As mentioned before, in entanglement theory, the operational and axiomatic classes of RNG operations are the LOCC and the Separable (SEP) channels. 
+
 <strong>Definition</strong><em>A channel $\mathcal{E}$ on a Hilbert space of $N$ qudits is a <strong>separable channel</strong> if it has a Kraus decomposition with separable Kraus operators, i.e.: 
 </em>
 {% katexmm %}
@@ -177,13 +178,12 @@ An intuition around how local measurements would act here is that they would alw
 
 The seminal work from Bennett et al. also quantified the gap, but only to the order of $10^{-6}$. A central objective of the approach by {% cite chitambar_increasing_2012 %} was to quantify this gap and define a measure of entanglement that can have a significant difference between the two classes. They managed to show a 12.5% gap using a measure that also has an operational interpretation. 
 
-<strong>Definition</strong> <em>Suppose we have an arbitrary state $\rho \in DO(\mathcal{H})$, and a set of LOCC transformations, each executed with probability $p\_i$, converting $\rho$ into $\rho\_i$. Then, we call a function $\mu: DO(\mathcal{H}) \rightarrow \mathbb{R}$ an <strong>entanglement monotone</strong>, when it satisfies the following inequality: 
+<strong>Definition</strong> <em>Suppose we have an arbitrary state $\rho \in DO(\mathcal{H})$, and a set of LOCC transformations, each executed with probability $p\_i$, converting $\rho$ into $\rho\_i$. Then, we call a function $\mu: DO(\mathcal{H}) \rightarrow \mathbb{R}$ an <strong>entanglement monotone</strong>, when it satisfies the following inequality: </em>
 {% katexmm %}
 $$
 \mu(\rho) \leq \sum_i p_i \mu(\rho_i)
 $$
 {% endkatexmm %}
-</em>
 
 
 Chitambar et al. defined a monotone that measures the success rate of a particular task: random-EPR pair distillation from  W-class states. W-class states are any state that is obtainable from the $\ket{W}=\frac{1}{\sqrt{3}}(\ket{100}+\ket{010}+\ket{001})$ state with LOCC operations and can be parameterized as $\sqrt{x\_0}\lvert 000\rangle + \sqrt{x\_A}\lvert 100\rangle + \sqrt{x\_B}\lvert 010\rangle + \sqrt{x\_C}\lvert 001\rangle$. Due to normalization $x\_0$ is fully determined by $1=x\_0+x\_A+x\_B+x\_C$, thus we will label W-class states as $\vec{x}=\\{x\_A,x\_B,x\_C\\}$. In random-EPR pair distillation, one uses a protocol to transform an initial W-class state to random singlet states $\ket{\psi}\_ij=\frac{1}{\sqrt{2}}(\lvert 01\rangle\_{ij} + \lvert 10\rangle\_{ij})$ between any two of the 3 parties as shown in the figure below.
@@ -243,13 +243,14 @@ While the SEP probability is 1, the LOCC probability is bound by $\kappa(\vec{x}
 The operationally defined set of free operations in the stabilizer formalism is the Stabilizer Operators. We will formally define them here. All the above concepts in Section \ref{sec:basics} including the Pauli group $\mathcal{P}\_n(d)$, the stabilizer group $S$, the Clifford group $Cl\_n(d)$, and stabilizer states STAB($d,n$) readily generalize from qubits to qudits as described in  {% cite heimendahl_axiomatic_2022 %}. Our formal definitions then will be stated using qudits: 
 
 <strong>Definition</strong> 
-<em>A quantum channel mapping $n$ $d$-qudits to $m$ $d$-qudits, for prime dimension $d$, is defined as a <strong>Stabilizer operation</strong> when it is a concatenation of operations that fall into one of the following categories:
+<em>A quantum channel mapping $n$ $d$-qudits to $m$ $d$-qudits, for prime dimension $d$, is defined as a <strong>Stabilizer operation</strong> when it is a concatenation of operations that fall into one of the following categories:</em>
 <ul>
 <li>preparation of qudits in stabilizer states </li>
 <li>application of a Clifford unitary</li>
 <li>measurement of a Pauli observable</li>
 <li>discarding of qudits</li>
 </ul>
+<em>
 Beyond the above, arbitrary random functions of previous measurement results can act as classical logic to decide which quantum operation to do in each step. 
 </em>
  
@@ -257,12 +258,12 @@ Beyond the above, arbitrary random functions of previous measurement results can
 We are taking the stabilizer polytope for $n$-qudits of $d$ dimension, $SP\_n(d)$ to be the set of free states. Then, the axiomatically defined RNG operations are the ones that map the stabilizer-polytope to itself. Similar to positivity, in some resource theories, these channels are not closed under tensor product. In order to enforce closeness under tensor product, the set of <em>completely</em>-RNG channels are of interest - in our case the Completely Stabilizer Preserving (CSP) channels, which - for any arbitrary $k$ dimensional extension, maps the $n+k$ dimensional stabilizer polytope to the $m+k$ dimensional stabilizer polytope: 
 
 <strong>Definition</strong>
-\textit{A linear superoperator $\mathcal{E}$ mapping $n$ and $m$ qudit spaces of $d$ dimension is <strong>Completely Stabilizer Preserving</strong> if and only if $\mathcal{E} \otimes id\_k (SP\_{n+k}(d)) \subset SP\_{m+k}(d)$ for all $k \in \mathbb{N}$.  }
+<em>A linear superoperator $\mathcal{E}$ mapping $n$ and $m$ qudit spaces of $d$ dimension is <strong>Completely Stabilizer Preserving</strong> if and only if $\mathcal{E} \otimes id\_k (SP\_{n+k}(d)) \subset SP\_{m+k}(d)$ for all $k \in \mathbb{N}$.  </em>
 
 
-A CSP operator is also CPTP {% cite heimendahl_axiomatic_2022 %}, thus they are legitimate quantum channels. How can we determine whether a stabilizer-preserving channel $\mathcal{E}$ is also CSP? An interesting result {% cite seddon\_quantifying\_2019 %} utilizes the Choi operator to prove that if the Choi operator (which can be looked at as a state) of $\mathcal{E}$ is stabilizer-preserving and trace-preserving, then $\mathcal{E}$ is CSP. 
+A CSP operator is also CPTP {% cite heimendahl_axiomatic_2022 %}, thus they are legitimate quantum channels. How can we determine whether a stabilizer-preserving channel $\mathcal{E}$ is also CSP? An interesting result {% cite seddon_quantifying_2019 %} utilizes the Choi operator to prove that if the Choi operator (which can be looked at as a state) of $\mathcal{E}$ is stabilizer-preserving and trace-preserving, then $\mathcal{E}$ is CSP. 
 
-With the definitions out of the way, let's look at the main result by Heimendahl et al. For the single qudit (qubit) case, $SO\_1(d)= CSP\_1(d)$. This is intuitively reasonable, as  However, starting from two qubits, CSP is strictly larger than SO. Heimendahl et al used the following channel as a counterexample to prove the separation between $SO\_2(2)$ and $CSP\_2(2)$: 
+With the definitions out of the way, let's look at the main result by Heimendahl et al. For the single qudit (qubit) case, $SO_1(d)= CSP_1(d)$. This is intuitively reasonable, as  However, starting from two qubits, CSP is strictly larger than SO. Heimendahl et al used the following channel as a counterexample to prove the separation between $SO_2(2)$ and $CSP_2(2)$: 
 
 {% katexmm %}
 $$
@@ -329,3 +330,22 @@ For larger qubit and qudit dimensions we refer the reader to {% cite heimendahl_
 Starting from the basics, we reviewed how the structure of the free operations in the theories of entanglement and magic are structured.  To explore entanglement, we looked at an early example by Bennett et al. that demonstrated measurement that is separable but not LOCC. Following Chitambar et al., we explored an entanglement monotone specifically designed to measure the maximum success of random-EPR distillation from W-class states, and how it can show a 12.5% gap between LOCC and SEP. 
 
 For the theory of magic, Heimendahl et al. did not work with magic monotones, instead, for 2-qubit states, they showed through a specific counter-example that is a completely stabilizer preserving operation but not a stabilizer operation. One could say that their result is similar in spirit to the Bennett et al. example, where careful arguments around a specific set of counterexamples demonstrate the separation of the two classes. Future work might explore actually quantifying the gap in this theory as well for magic distillation tasks. Further implications of the CSP / SO separation could be that the classically simulatable class of channels will become larger, beyond the Gottesman-Knill theorem. 
+
+## Comments
+
+Comments are provided by giscus and Github Discussions. You will have to login with your Github account to comment.
+
+<script src="https://giscus.app/client.js"
+        data-repo="balopat/balopat.github.io"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkxODEyMzUxOA=="
+        data-mapping="number"
+        data-term="2"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>

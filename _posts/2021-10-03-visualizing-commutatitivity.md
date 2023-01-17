@@ -13,7 +13,6 @@ I built a simple visualization tool, the commutativity plot, that I used to bett
 
 Disclaimer: the function implementation and Mathematica syntax used is very naive, and blows up with larger groups. I am open to PRs, contributions, suggestions for improvements!
 
-Please visit the [Github Discussion for this post](https://github.com/balopat/balopat.github.io/discussions/1) for comments! 
 
 
 ## Groups acting on sets
@@ -280,3 +279,22 @@ This is probably just the tip of the iceberg. If I had an infinite amount of tim
    - create a Python/Javascript version of it, so it doesn't depend on non-opensource software
 
 If you find issues with the post, please open an issue or PR to fix it!
+
+## Comments
+
+Comments are provided by giscus and Github Discussions. You will have to login with your Github account to comment.
+
+<script src="https://giscus.app/client.js"
+        data-repo="balopat/balopat.github.io"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkxODEyMzUxOA=="
+        data-mapping="number"
+        data-term="1"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
