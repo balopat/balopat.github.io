@@ -312,15 +312,15 @@ The channels that have a Clifford dilation are the ones that have no measurement
 
 The sketch of the proof is the following: 
 <ol>
-<li>it is shown that $\Lambda$ is an <em>almost-diagonal channel</em>, meaning that it belongs to $AD\_2$ that is defined by its effect on the computational basis states: </li>
+<li>it is shown that $\Lambda$ is an <em>almost-diagonal channel</em>, meaning that it belongs to $AD_2$ that is defined by its effect on the computational basis states: </li>
 {% katexmm %}
 $$
 \mathcal{E}(\ket{00}\bra{00})=\ket{++}\bra{++}, \mathcal{E}(\ket{x}\bra{x})=\ket{x}\bra{x}, x \in \ket{00}^\perp
 $$
 {% endkatexmm %}
-<li>This property is then used to show that $\Lambda$ is extremal in $CS\_2$. From here, if $\Lambda$ is a stabilizer operation, then it would follow that it is an extremal point in $SO\_2$ as well. This is due to convex subsets inheriting the extremality of points from their supersets. </li>
-<li>It is shown that extremal points in $SO\_2$ do not have a Clifford dilation.</li>
-<li>However, it can be proved that $\Lambda$ cannot have a Clifford dilation - thus it must be that $\Lambda \in CSP\_2$ but $\Lambda \notin SO\_2$</li>
+<li>This property is then used to show that $\Lambda$ is extremal in $CS_2$. From here, if $\Lambda$ is a stabilizer operation, then it would follow that it is an extremal point in $SO\_2$ as well. This is due to convex subsets inheriting the extremality of points from their supersets. </li>
+<li>It is shown that extremal points in $SO_2$ do not have a Clifford dilation.</li>
+<li>However, it can be proved that $\Lambda$ cannot have a Clifford dilation - thus it must be that $\Lambda \in CSP_2$ but $\Lambda \notin SO_2$</li>
 </ol>
 
 For larger qubit and qudit dimensions we refer the reader to {% cite heimendahl_axiomatic_2022 %}. For the full picture though, it is worth mentioning that for larger dimensional qudit states even $CSP\_n(d)$ might not be maximal in terms of free operations. For $d$ odd dimensions, resource theories of magic use the Wigner function representation of a function. This is a quasi-probability distribution in phase-space and its total negativity is a magic monotone called <em>mana</em>. Thus, the set of free states can be enlarged to include those with positive Wigner functions, and channels that preserve the positivity of the Wigner function and do so closed under the tensor product are called the <em>completely</em>-Wigner-positivity-preserving ($CWPP\_n,m(d)$) channels. Thus in case of odd $d\gt2$ dimensions, the full hierarchy is $SO\_{n,m}(d) \subset CSP\_{n,m} \subseteq CWPP\_{n,m}(d)$, where the last containment is conjectured to be proper by Heimendahl et al. 
