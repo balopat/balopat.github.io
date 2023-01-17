@@ -233,14 +233,14 @@ While the SEP probability is 1, the LOCC probability is bound by $\kappa(\vec{x}
 
 
 <center><img src='/assets/images/kappas.png' width='100%'/></center>
-<center><small>Maximum probability of generating EPR pairs from a parameterized W-class state defined in \ref{eq:param-w-class}.</small></center>
+<center><small>Maximum probability of generating EPR pairs from a parameterized W-class state.</small></center>
 
 
 
 
 ### Stabilizer formalism: $SO\_n(d) \subset CSP$ 
 
-The operationally defined set of free operations in the stabilizer formalism is the Stabilizer Operators. We will formally define them here. All the above concepts in Section \ref{sec:basics} including the Pauli group $\mathcal{P}\_n(d)$, the stabilizer group $S$, the Clifford group $Cl\_n(d)$, and stabilizer states STAB($d,n$) readily generalize from qubits to qudits as described in  {% cite heimendahl_axiomatic_2022 %}. Our formal definitions then will be stated using qudits: 
+The operationally defined set of free operations in the stabilizer formalism is the Stabilizer Operators. We will formally define them here. All the above concepts in [Fundamental concepts](#fundamental-concepts) including the Pauli group $\mathcal{P}\_n(d)$, the stabilizer group $S$, the Clifford group $Cl\_n(d)$, and stabilizer states STAB($d,n$) readily generalize from qubits to qudits as described in  {% cite heimendahl_axiomatic_2022 %}. Our formal definitions then will be stated using qudits: 
 
 <strong>Definition</strong> 
 <em>A quantum channel mapping $n$ $d$-qudits to $m$ $d$-qudits, for prime dimension $d$, is defined as a <strong>Stabilizer operation</strong> when it is a concatenation of operations that fall into one of the following categories:</em>
@@ -318,7 +318,7 @@ $$
 \mathcal{E}(\ket{00}\bra{00})=\ket{++}\bra{++}, \mathcal{E}(\ket{x}\bra{x})=\ket{x}\bra{x}, x \in \ket{00}^\perp
 $$
 {% endkatexmm %}
-<li>This property is then used to show that $\Lambda$ is extremal in $CS_2$. From here, if $\Lambda$ is a stabilizer operation, then it would follow that it is an extremal point in $SO\_2$ as well. This is due to convex subsets inheriting the extremality of points from their supersets. </li>
+<li>This property is then used to show that $\Lambda$ is extremal in $CS_2$. From here, if $\Lambda$ is a stabilizer operation, then it would follow that it is an extremal point in $SO_2$ as well. This is due to convex subsets inheriting the extremality of points from their supersets. </li>
 <li>It is shown that extremal points in $SO_2$ do not have a Clifford dilation.</li>
 <li>However, it can be proved that $\Lambda$ cannot have a Clifford dilation - thus it must be that $\Lambda \in CSP_2$ but $\Lambda \notin SO_2$</li>
 </ol>
