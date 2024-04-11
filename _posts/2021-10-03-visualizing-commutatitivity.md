@@ -248,15 +248,7 @@ And let's use our bounds: $\lvert Z(G) \lvert / \lvert G \lvert \leq 1/4$ and $\
 {% katexmm %}
 $$
 p(g,h \in G \text{ commute}) \leq \frac{\sum_{g \in Z(G)} 1 }{|G|} + \frac{\sum_{g \notin Z(G)} 1/2}{|G|} = \\
-=\frac{|Z(G)|}{|G|}  + \frac{|G|-|Z(G)|}{|G|}1/2 \leq 1/4 + \frac{|G|-|Z(G)|}{|G|}1/2
-$$
-{% endkatexmm %}
-
-Here we can use the bounds again! 
-
-{% katexmm %}
-$$
-p(g,h \in G \text{ commute}) \leq 1/4  + \frac{|G|-|Z(G)|}{|G|}1/2 \leq 1/4 + (1-1/4) * 1/2 = 5/8
+=\frac{|Z(G)|}{|G|}  + \frac{|G|-|Z(G)|}{|G|}1/2 = 1/2 + \frac{|Z(G)|}{2|G|} \leq 1/2 + 1/8 = 5/8
 $$
 {% endkatexmm %}
 
@@ -280,9 +272,15 @@ This is probably just the tip of the iceberg. If I had an infinite amount of tim
 
 If you find issues with the post, please open an issue or PR to fix it!
 
+## Acknowledgment 
+
+Big thank you to Prof. Nathan Carter for [his comments](https://github.com/nathancarter/group-explorer/issues/19) on this blogpost and finding a bug in the original proof. 
+
 ## Comments
 
 Comments are provided by giscus and Github Discussions. You will have to login with your Github account to comment.
+
+
 
 <script src="https://giscus.app/client.js"
         data-repo="balopat/balopat.github.io"
