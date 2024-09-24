@@ -24,3 +24,20 @@ bundle exec jekyll serve
 ```
 bundle exec jekyll serve --drafts
 ```
+
+## Build / publish
+
+I use the docs folder with Github pages, so run this before committing and `git push`:
+
+```
+bundle exec jekyll build -d docs
+```
+
+## Don't forget to readd CNAME
+
+This is a bit annoying but the CNAME entry gets deleted by the build process. Until I find a better way to do this don't forget to readd it before pushing.
+
+```
+git add .
+git checkout docs/CNAME
+```

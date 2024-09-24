@@ -24,3 +24,11 @@ bundle exec jekyll serve
 ```
 bundle exec jekyll serve --drafts
 ```
+
+## Build / publish
+
+I use the docs folder with Github pages, so run this before committing and `git push`:
+
+```
+bundle exec jekyll build -d docs
+```
